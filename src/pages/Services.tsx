@@ -25,7 +25,6 @@ import {
   Security,
   Speed,
   Analytics,
-  DeviceHub,
   Rocket,
   CheckCircle,
   ExpandMore,

@@ -8,7 +8,6 @@ import {
   CardContent,
   IconButton,
   useTheme,
-  useMediaQuery,
 } from "@mui/material";
 import {
   CloudQueue,
@@ -30,7 +29,6 @@ interface Service {
 
 const ServicesSection: React.FC = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const services: Service[] = [
     {
