@@ -1,70 +1,245 @@
-# Getting Started with Create React App
+# AstroMANIA Enterprise
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, professional tech company website built with React, TypeScript, and Material-UI (MUI). This project showcases AstroMANIA Enterprise's expertise in AI-powered solutions, DevOps excellence, and scalable software development.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Modern Tech Stack**: Built with React 19, TypeScript, and Material-UI
+- **Responsive Design**: Fully responsive design that works on all devices
+- **Material Design**: Clean, minimalistic UI following Material Design principles
+- **Dark/Light Mode**: Toggle between dark and light themes
+- **Smooth Animations**: Beautiful animations powered by Framer Motion
+- **Professional Layout**: Multiple pages showcasing company services and information
+- **SEO Ready**: Optimized for search engines
+- **TypeScript**: Full TypeScript support for better development experience
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend Framework**: React 19.1.1
+- **Language**: TypeScript 4.9.5
+- **UI Library**: Material-UI (MUI) 7.3.2
+- **Styling**: Emotion (CSS-in-JS)
+- **Routing**: React Router DOM 7.9.1
+- **Animations**: Framer Motion 12.23.16
+- **Icons**: Material-UI Icons
+- **Fonts**: Roboto (Google Fonts)
+- **Build Tool**: Create React App 5.0.1
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📱 Pages
 
-### `npm test`
+### Home Page
+- Hero section with company introduction
+- Services overview
+- Call-to-action sections
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### About Page
+- Company mission and vision
+- Core values presentation
+- Team member profiles
+- Company timeline/milestones
 
-### `npm run build`
+### Services Page
+- Detailed service offerings:
+  - AI & Machine Learning Solutions
+  - DevOps & Cloud Infrastructure
+  - Enterprise Architecture
+  - Security & Compliance
+  - Performance Optimization
+  - Data Analytics & BI
+- Process workflow
+- Technology stacks used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Contact Page
+- Contact form with validation
+- Company contact information
+- Business hours
+- Interactive elements
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🎨 Design Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Modern Gradient Backgrounds**: Beautiful gradient overlays
+- **Card-Based Layout**: Clean card components for content organization
+- **Hover Effects**: Smooth hover animations on interactive elements
+- **Typography**: Professional typography hierarchy
+- **Color Scheme**: Professional blue and purple gradient theme
+- **Responsive Grid**: Flexible grid system for all screen sizes
 
-### `npm run eject`
+## 🚀 Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Node.js (version 16 or higher)
+- npm or yarn package manager
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Installation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd astromania
+```
 
-## Learn More
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Start the development server:
+```bash
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application will open in your browser at `http://localhost:3000`.
 
-### Code Splitting
+### Available Scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- `npm start` - Runs the app in development mode
+- `npm test` - Launches the test runner
+- `npm run build` - Builds the app for production
+- `npm run eject` - Ejects from Create React App (one-way operation)
 
-### Analyzing the Bundle Size
+## 📁 Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+astromania/
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── Header.tsx          # Navigation header
+│   │   ├── Footer.tsx          # Footer component
+│   │   ├── HeroSection.tsx     # Hero section
+│   │   └── ServicesSection.tsx # Services overview
+│   ├── pages/
+│   │   ├── Home.tsx            # Home page
+│   │   ├── About.tsx           # About page
+│   │   ├── Services.tsx        # Services page
+│   │   └── Contact.tsx         # Contact page
+│   ├── theme/
+│   │   └── theme.ts            # MUI theme configuration
+│   ├── App.tsx                 # Main app component
+│   ├── index.tsx              # App entry point
+│   └── index.css              # Global styles
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
-### Making a Progressive Web App
+## 🎯 Key Components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Theme Configuration
+Custom MUI theme with:
+- Professional color palette
+- Typography scale
+- Component style overrides
+- Dark/light mode support
 
-### Advanced Configuration
+### Header Component
+- Responsive navigation
+- Mobile drawer menu
+- Dark mode toggle
+- Smooth scroll navigation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Hero Section
+- Animated gradient background
+- Company introduction
+- Call-to-action buttons
+- Animated icons and elements
 
-### Deployment
+### Services Components
+- Service cards with hover effects
+- Technology tags
+- Expandable feature lists
+- Pricing information
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🎨 Customization
 
-### `npm run build` fails to minify
+### Colors
+The primary color scheme can be modified in `src/theme/theme.ts`:
+- Primary: Blue (#1976d2)
+- Secondary: Purple (#9c27b0)
+- Gradients: Various blue-purple combinations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Typography
+Font customization available in the theme configuration:
+- Primary font: Roboto
+- Font weights: 300, 400, 500, 700
+- Responsive font sizes
+
+### Animations
+Framer Motion animations can be customized in individual components:
+- Fade in/out effects
+- Slide animations
+- Hover transformations
+- Stagger animations
+
+## 📱 Responsive Design
+
+The website is fully responsive with breakpoints:
+- Mobile: < 600px
+- Tablet: 600px - 960px
+- Desktop: > 960px
+
+## 🚀 Deployment
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+This creates an optimized production build in the `build` folder.
+
+### Deployment Options
+
+- **Netlify**: Drag and drop the build folder
+- **Vercel**: Connect your Git repository
+- **AWS S3**: Upload build files to S3 bucket
+- **GitHub Pages**: Use gh-pages package
+
+## 🔧 Performance Optimizations
+
+- Code splitting with React.lazy()
+- Optimized images and assets
+- Efficient re-rendering with React.memo()
+- Lazy loading for animations
+- Minified CSS and JavaScript
+
+## 🧪 Testing
+
+Run tests with:
+```bash
+npm test
+```
+
+The project includes basic component tests using React Testing Library.
+
+## 📝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🤝 Support
+
+For support and questions:
+- Email: contact@astromania.com
+- Phone: +1 (555) 123-4567
+
+## 🌟 Acknowledgments
+
+- Material-UI team for the excellent component library
+- Framer Motion for smooth animations
+- React team for the amazing framework
+- TypeScript team for type safety
+
+---
+
+Built with ❤️ by AstroMANIA Enterprise
