@@ -336,7 +336,7 @@ const Services: React.FC = () => {
       <Container maxWidth="lg" sx={{ py: 8 }}>
         <Grid container spacing={4}>
           {services.map((service, index) => (
-            <Grid item xs={12} lg={6} key={index}>
+            <Grid size={{ xs: 12, lg: 6 }} key={index}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -538,7 +538,7 @@ const Services: React.FC = () => {
           </Typography>
           <Grid container spacing={4}>
             {processSteps.map((step, index) => (
-              <Grid item xs={12} md={6} lg={2.4} key={index}>
+              <Grid size={{ xs: 12, md: 6, lg: 2.4 }} key={index}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
