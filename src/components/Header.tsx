@@ -98,7 +98,7 @@ const Header: React.FC = () => {
         position="fixed"
         elevation={0}
         sx={{
-          backgroundColor: themedStyles.getMatteBackground.primary,
+          backgroundColor: themedStyles.getMatteBackground("primary"),
           backdropFilter: "blur(16px) saturate(180%)",
           borderBottom: `1px solid ${themedStyles.getBorderColor()}`,
           boxShadow: themedStyles.getShadow("low"),
@@ -236,7 +236,7 @@ const Header: React.FC = () => {
         }}
         PaperProps={{
           sx: {
-            backgroundColor: themedStyles.getMatteBackground.primary,
+            backgroundColor: themedStyles.getMatteBackground("primary"),
             borderLeft: `1px solid ${themedStyles.getBorderColor()}`,
           },
         }}

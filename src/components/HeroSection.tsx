@@ -6,7 +6,6 @@ import {
   Button,
   Grid,
   Card,
-  useTheme,
   Chip,
 } from "@mui/material";
 import {
@@ -22,10 +21,9 @@ import {
 } from "../contexts/ThemeContext";
 
 const HeroSection: React.FC = () => {
-  const theme = useTheme();
   const { colors } = useCustomTheme();
   const themedStyles = useThemedStyles();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  // const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 },
