@@ -44,7 +44,7 @@
       "@types/*": ["src/types/*"],
       "@theme/*": ["src/theme/*"],
       "@assets/*": ["src/assets/*"],
-      "@styles/*": ["public/styles/*"]
+      "@styles/*": ["src/styles/*"]
     },
 
     /* Type Definitions */
