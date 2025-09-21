@@ -5,8 +5,8 @@ import {
   Typography,
   Button,
   Grid,
+  Card,
   useTheme,
-  useMediaQuery,
   Chip,
 } from "@mui/material";
 import {
@@ -16,11 +16,16 @@ import {
   Architecture,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
+import {
+  useTheme as useCustomTheme,
+  useThemedStyles,
+} from "../contexts/ThemeContext";
 
 const HeroSection: React.FC = () => {
   const theme = useTheme();
+  const { colors } = useCustomTheme();
+  const themedStyles = useThemedStyles();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 },
@@ -42,22 +47,26 @@ const HeroSection: React.FC = () => {
     { icon: <Architecture />, label: "Software Development" },
   ];
 
+  const stats = [
+    { value: "500+", label: "Projects Delivered" },
+    { value: "50+", label: "Enterprise Clients" },
+    { value: "99.9%", label: "Uptime Guarantee" },
+    { value: "24/7", label: "Expert Support" },
+  ];
+
   return (
     <Box
       sx={{
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        background: `linear-gradient(135deg,
-          ${theme.palette.background.default} 0%,
-          ${theme.palette.primary.light}15 50%,
-          ${theme.palette.secondary.light}10 100%)`,
+        backgroundColor: themedStyles.getMatteBackground("primary"),
         position: "relative",
-        overflow: "hidden",
-        pt: 8,
+        pt: 10,
+        pb: 8,
       }}
     >
-      {/* Background Animation */}
+      {/* Subtle background pattern */}
       <Box
         sx={{
           position: "absolute",
@@ -65,10 +74,8 @@ const HeroSection: React.FC = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: `radial-gradient(circle at 20% 80%, ${theme.palette.primary.main}15 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, ${theme.palette.secondary.main}15 0%, transparent 50%),
-                      radial-gradient(circle at 40% 40%, ${theme.palette.info.main}10 0%, transparent 50%)`,
-          zIndex: 0,
+          opacity: 0.03,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23${colors.deepBlue.replace("#", "")}' fill-opacity='1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }}
       />
 
@@ -78,17 +85,19 @@ const HeroSection: React.FC = () => {
           initial="initial"
           animate="animate"
         >
-          <Grid container spacing={4} alignItems="center">
+          <Grid container spacing={6} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }}>
               <motion.div variants={fadeInUp}>
                 <Chip
                   label="Enterprise Software Solutions"
                   sx={{
                     mb: 3,
-                    backgroundColor: theme.palette.primary.light + "20",
-                    color: theme.palette.primary.main,
+                    backgroundColor: colors.lightGray,
+                    color: colors.deepBlue,
                     fontWeight: 600,
                     fontSize: "0.875rem",
+                    border: `1px solid ${colors.silver}`,
+                    fontFamily: '"Open Sauce Sans", sans-serif',
                   }}
                 />
               </motion.div>
@@ -100,17 +109,34 @@ const HeroSection: React.FC = () => {
                   sx={{
                     fontWeight: 800,
                     mb: 2,
-                    background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
-                    backgroundClip: "text",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    fontSize: isMobile ? "2.5rem" : "3.5rem",
+                    color: themedStyles.getTextColor("primary"),
+                    fontSize: { xs: "2.5rem", md: "3.5rem" },
                     lineHeight: 1.1,
+                    fontFamily: '"Open Sauce One", sans-serif',
+                    letterSpacing: "-0.02em",
                   }}
                 >
                   AstroMANIA
                   <br />
-                  Enterprise
+                  <Box
+                    component="span"
+                    sx={{
+                      color: colors.accentBlue,
+                      position: "relative",
+                      "&::after": {
+                        content: '""',
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "3px",
+                        backgroundColor: colors.accentBlue,
+                        borderRadius: "2px",
+                      },
+                    }}
+                  >
+                    Enterprise
+                  </Box>
                 </Typography>
               </motion.div>
 
@@ -120,9 +146,10 @@ const HeroSection: React.FC = () => {
                   component="h2"
                   sx={{
                     mb: 3,
-                    color: theme.palette.text.secondary,
+                    color: themedStyles.getTextColor("secondary"),
                     fontWeight: 400,
                     lineHeight: 1.6,
+                    fontFamily: '"Open Sauce Sans", sans-serif',
                   }}
                 >
                   Developing scalable software solutions using cutting-edge AI
@@ -135,9 +162,10 @@ const HeroSection: React.FC = () => {
                   variant="body1"
                   sx={{
                     mb: 4,
-                    color: theme.palette.text.secondary,
+                    color: themedStyles.getTextColor("secondary"),
                     fontSize: "1.125rem",
                     lineHeight: 1.8,
+                    fontFamily: '"Open Sauce Sans", sans-serif',
                   }}
                 >
                   Transform your business with our innovative approach to
@@ -152,15 +180,9 @@ const HeroSection: React.FC = () => {
                     variant="contained"
                     size="large"
                     sx={{
-                      px: 4,
-                      py: 1.5,
+                      ...themedStyles.buttonStyle.primary,
                       fontSize: "1.1rem",
-                      background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
-                      "&:hover": {
-                        background: `linear-gradient(45deg, ${theme.palette.primary.dark} 30%, ${theme.palette.secondary.dark} 90%)`,
-                        transform: "translateY(-2px)",
-                      },
-                      transition: "all 0.3s ease",
+                      fontFamily: '"Open Sauce Sans", sans-serif',
                     }}
                   >
                     Start Your Project
@@ -169,16 +191,9 @@ const HeroSection: React.FC = () => {
                     variant="outlined"
                     size="large"
                     sx={{
-                      px: 4,
-                      py: 1.5,
+                      ...themedStyles.buttonStyle.secondary,
                       fontSize: "1.1rem",
-                      borderColor: theme.palette.primary.main,
-                      color: theme.palette.primary.main,
-                      "&:hover": {
-                        backgroundColor: theme.palette.primary.main + "08",
-                        transform: "translateY(-2px)",
-                      },
-                      transition: "all 0.3s ease",
+                      fontFamily: '"Open Sauce Sans", sans-serif',
                     }}
                   >
                     View Our Solutions
@@ -195,10 +210,14 @@ const HeroSection: React.FC = () => {
                       label={specialty.label}
                       variant="outlined"
                       sx={{
-                        borderColor: theme.palette.primary.main + "40",
-                        color: theme.palette.primary.main,
+                        borderColor: themedStyles.getBorderColor(),
+                        color: themedStyles.getTextColor("primary"),
+                        backgroundColor:
+                          themedStyles.getMatteBackground("secondary"),
+                        fontFamily: '"Open Sauce Sans", sans-serif',
                         "&:hover": {
-                          backgroundColor: theme.palette.primary.main + "10",
+                          backgroundColor: colors.lightGray,
+                          borderColor: themedStyles.getBorderColor("hover"),
                         },
                       }}
                     />
@@ -216,64 +235,113 @@ const HeroSection: React.FC = () => {
                   sx={{
                     position: "relative",
                     display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: isMobile ? "300px" : "500px",
+                    flexDirection: "column",
+                    gap: 3,
+                    height: { xs: "400px", md: "500px" },
                   }}
                 >
-                  {/* Animated circles */}
-                  <motion.div
-                    animate={{
-                      rotate: 360,
-                    }}
-                    transition={{
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    style={{
-                      position: "absolute",
-                      width: "200px",
-                      height: "200px",
-                      border: `2px solid ${theme.palette.primary.main}40`,
-                      borderRadius: "50%",
-                      borderTop: `2px solid ${theme.palette.primary.main}`,
-                    }}
-                  />
-                  <motion.div
-                    animate={{
-                      rotate: -360,
-                    }}
-                    transition={{
-                      duration: 15,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    style={{
-                      position: "absolute",
-                      width: "300px",
-                      height: "300px",
-                      border: `2px solid ${theme.palette.secondary.main}40`,
-                      borderRadius: "50%",
-                      borderRight: `2px solid ${theme.palette.secondary.main}`,
-                    }}
-                  />
-
-                  {/* Central icon */}
-                  <Box
+                  {/* Main hero card */}
+                  <Card
                     sx={{
-                      width: 120,
-                      height: 120,
-                      backgroundColor: theme.palette.primary.main,
-                      borderRadius: "50%",
+                      ...themedStyles.cardStyle,
+                      flex: 1,
                       display: "flex",
-                      alignItems: "center",
+                      flexDirection: "column",
                       justifyContent: "center",
-                      boxShadow: `0 8px 32px ${theme.palette.primary.main}40`,
+                      alignItems: "center",
+                      background: themedStyles.getMatteBackground("elevated"),
+                      border: `2px solid ${themedStyles.getBorderColor()}`,
+                      position: "relative",
+                      overflow: "hidden",
                     }}
                   >
-                    <RocketLaunch sx={{ fontSize: 60, color: "white" }} />
-                  </Box>
+                    {/* Logo representation */}
+                    <Box
+                      sx={{
+                        width: 120,
+                        height: 120,
+                        backgroundColor: colors.deepBlue,
+                        borderRadius: "24px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        mb: 3,
+                        position: "relative",
+                        "&::before": {
+                          content: '""',
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          width: "60%",
+                          height: "60%",
+                          background: "#ffffff",
+                          borderRadius: "8px",
+                          transform: "translate(-50%, -50%) rotate(45deg)",
+                        },
+                        "&::after": {
+                          content: '""',
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          width: "30%",
+                          height: "30%",
+                          background: colors.deepBlue,
+                          borderRadius: "4px",
+                          transform: "translate(-50%, -50%) rotate(45deg)",
+                          zIndex: 1,
+                        },
+                      }}
+                    />
+
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        color: themedStyles.getTextColor("primary"),
+                        fontFamily: '"Open Sauce One", sans-serif',
+                        textAlign: "center",
+                      }}
+                    >
+                      Premium Enterprise Solutions
+                    </Typography>
+                  </Card>
+
+                  {/* Stats grid */}
+                  <Grid container spacing={2}>
+                    {stats.map((stat, index) => (
+                      <Grid size={{ xs: 6 }} key={index}>
+                        <Card
+                          sx={{
+                            ...themedStyles.cardStyle,
+                            p: 2,
+                            textAlign: "center",
+                            background:
+                              themedStyles.getMatteBackground("secondary"),
+                            border: `1px solid ${themedStyles.getBorderColor()}`,
+                          }}
+                        >
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              color: colors.accentBlue,
+                              fontWeight: 700,
+                              fontFamily: '"Open Sauce One", sans-serif',
+                            }}
+                          >
+                            {stat.value}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              color: themedStyles.getTextColor("secondary"),
+                              fontFamily: '"Open Sauce Sans", sans-serif',
+                            }}
+                          >
+                            {stat.label}
+                          </Typography>
+                        </Card>
+                      </Grid>
+                    ))}
+                  </Grid>
                 </Box>
               </motion.div>
             </Grid>

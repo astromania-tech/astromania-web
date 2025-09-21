@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
   Box,
   IconButton,
@@ -11,35 +10,31 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  useTheme,
   useMediaQuery,
   Container,
-} from '@mui/material';
+} from "@mui/material";
 import {
   Menu as MenuIcon,
   Close as CloseIcon,
   Brightness4,
   Brightness7,
-} from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+} from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { useTheme, useThemedStyles } from "../contexts/ThemeContext";
+import Logo from "./Logo";
 
-interface HeaderProps {
-  darkMode: boolean;
-  toggleDarkMode: () => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+const Header: React.FC = () => {
+  const { isDarkMode, toggleDarkMode, colors } = useTheme();
+  const themedStyles = useThemedStyles();
+  const isMobile = useMediaQuery("(max-width:768px)");
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
 
   const navigationItems = [
-    { label: 'Home', path: '/' },
-    { label: 'About', path: '/about' },
-    { label: 'Services', path: '/services' },
-    { label: 'Solutions', path: '/solutions' },
-    { label: 'Contact', path: '/contact' },
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+    { label: "Services", path: "/services" },
+    { label: "Contact", path: "/contact" },
   ];
 
   const handleDrawerToggle = () => {
@@ -52,8 +47,17 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
   };
 
   const drawer = (
-    <Box sx={{ width: 250 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+    <Box sx={{ width: 280, height: "100%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          p: 3,
+          borderBottom: `1px solid ${themedStyles.getBorderColor()}`,
+        }}
+      >
+        <Logo size="small" onClick={() => handleNavigation("/")} />
         <IconButton onClick={handleDrawerToggle}>
           <CloseIcon />
         </IconButton>
@@ -61,8 +65,26 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
       <List>
         {navigationItems.map((item) => (
           <ListItem key={item.label} disablePadding>
-            <ListItemButton onClick={() => handleNavigation(item.path)}>
-              <ListItemText primary={item.label} />
+            <ListItemButton
+              onClick={() => handleNavigation(item.path)}
+              sx={{
+                borderRadius: 2,
+                py: 1.5,
+                px: 2,
+                m: 1,
+                "&:hover": {
+                  backgroundColor: themedStyles.getMatteBackground("elevated"),
+                },
+              }}
+            >
+              <ListItemText
+                primary={item.label}
+                primaryTypographyProps={{
+                  fontFamily: '"Open Sauce Sans", sans-serif',
+                  fontWeight: 500,
+                  color: themedStyles.getTextColor(),
+                }}
+              />
             </ListItemButton>
           </ListItem>
         ))}
@@ -72,59 +94,90 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
 
   return (
     <>
-      <AppBar position="fixed" elevation={0}>
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{
+          backgroundColor: themedStyles.getMatteBackground.primary,
+          backdropFilter: "blur(16px) saturate(180%)",
+          borderBottom: `1px solid ${themedStyles.getBorderColor()}`,
+          boxShadow: themedStyles.getShadow("low"),
+        }}
+      >
         <Container maxWidth="xl">
-          <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <Toolbar sx={{ justifyContent: "space-between", py: 1 }}>
             {/* Logo */}
-            <Typography
-              variant="h4"
-              component="div"
-              sx={{
-                fontWeight: 'bold',
-                background: 'linear-gradient(45deg, #1976d2 30%, #9c27b0 90%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                cursor: 'pointer',
-              }}
-              onClick={() => handleNavigation('/')}
-            >
-              AstroMANIA
-            </Typography>
+            <Logo onClick={() => handleNavigation("/")} />
 
             {/* Desktop Navigation */}
             {!isMobile && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                 {navigationItems.map((item) => (
                   <Button
                     key={item.label}
-                    color="inherit"
                     onClick={() => handleNavigation(item.path)}
                     sx={{
-                      textTransform: 'none',
-                      fontSize: '1rem',
+                      color: themedStyles.getTextColor("secondary"),
+                      textTransform: "none",
+                      fontSize: "0.875rem",
                       fontWeight: 500,
-                      '&:hover': {
-                        backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                      fontFamily: '"Open Sauce Sans", sans-serif',
+                      px: 2,
+                      py: 1,
+                      borderRadius: 2,
+                      transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+                      "&:hover": {
+                        backgroundColor:
+                          themedStyles.getMatteBackground("elevated"),
+                        color: themedStyles.getTextColor("primary"),
+                        transform: "translateY(-1px)",
                       },
                     }}
                   >
                     {item.label}
                   </Button>
                 ))}
-                <IconButton onClick={toggleDarkMode} color="inherit">
-                  {darkMode ? <Brightness7 /> : <Brightness4 />}
+                <IconButton
+                  onClick={toggleDarkMode}
+                  sx={{
+                    ml: 2,
+                    color: themedStyles.getTextColor("secondary"),
+                    backgroundColor: "transparent",
+                    border: `1px solid ${themedStyles.getBorderColor()}`,
+                    borderRadius: 2,
+                    "&:hover": {
+                      backgroundColor:
+                        themedStyles.getMatteBackground("elevated"),
+                      borderColor: themedStyles.getBorderColor("hover"),
+                      transform: "scale(1.05)",
+                    },
+                  }}
+                >
+                  {isDarkMode ? <Brightness7 /> : <Brightness4 />}
                 </IconButton>
                 <Button
                   variant="contained"
+                  onClick={() => handleNavigation("/contact")}
                   sx={{
                     ml: 2,
-                    background: 'linear-gradient(45deg, #1976d2 30%, #9c27b0 90%)',
-                    '&:hover': {
-                      background: 'linear-gradient(45deg, #1565c0 30%, #7b1fa2 90%)',
+                    backgroundColor: colors.deepBlue,
+                    color: "#ffffff",
+                    fontFamily: '"Open Sauce Sans", sans-serif',
+                    fontWeight: 600,
+                    fontSize: "0.875rem",
+                    textTransform: "none",
+                    px: 3,
+                    py: 1.5,
+                    borderRadius: 2,
+                    boxShadow: "none",
+                    border: "none",
+                    transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+                    "&:hover": {
+                      backgroundColor: colors.navyBlue,
+                      transform: "translateY(-1px)",
+                      boxShadow: themedStyles.getShadow("medium"),
                     },
                   }}
-                  onClick={() => handleNavigation('/contact')}
                 >
                   Get Started
                 </Button>
@@ -133,15 +186,36 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
 
             {/* Mobile Navigation */}
             {isMobile && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <IconButton onClick={toggleDarkMode} color="inherit">
-                  {darkMode ? <Brightness7 /> : <Brightness4 />}
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <IconButton
+                  onClick={toggleDarkMode}
+                  sx={{
+                    color: themedStyles.getTextColor("secondary"),
+                    backgroundColor: "transparent",
+                    border: `1px solid ${themedStyles.getBorderColor()}`,
+                    borderRadius: 2,
+                    "&:hover": {
+                      backgroundColor:
+                        themedStyles.getMatteBackground("elevated"),
+                      borderColor: themedStyles.getBorderColor("hover"),
+                    },
+                  }}
+                >
+                  {isDarkMode ? <Brightness7 /> : <Brightness4 />}
                 </IconButton>
                 <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  edge="start"
                   onClick={handleDrawerToggle}
+                  sx={{
+                    color: themedStyles.getTextColor("secondary"),
+                    backgroundColor: "transparent",
+                    border: `1px solid ${themedStyles.getBorderColor()}`,
+                    borderRadius: 2,
+                    "&:hover": {
+                      backgroundColor:
+                        themedStyles.getMatteBackground("elevated"),
+                      borderColor: themedStyles.getBorderColor("hover"),
+                    },
+                  }}
                 >
                   <MenuIcon />
                 </IconButton>
@@ -158,7 +232,13 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
+        }}
+        PaperProps={{
+          sx: {
+            backgroundColor: themedStyles.getMatteBackground.primary,
+            borderLeft: `1px solid ${themedStyles.getBorderColor()}`,
+          },
         }}
       >
         {drawer}

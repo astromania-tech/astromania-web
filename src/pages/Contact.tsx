@@ -93,7 +93,7 @@ const Contact: React.FC = () => {
     }
 
     // Here you would typically send the form data to your backend
-    console.log("Form submitted:", formData);
+    // Form data would be sent to API endpoint
 
     // Reset form
     setFormData({

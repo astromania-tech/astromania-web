@@ -1,28 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ThemeProvider, CssBaseline, Box } from "@mui/material";
-import { theme, darkTheme } from "./theme/theme";
+import { Box } from "@mui/material";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Contact from "./pages/Contact";
 import Services from "./pages/Services";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import Contact from "./pages/Contact";
 
 const App: React.FC = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
   return (
-    <ThemeProvider theme={darkMode ? darkTheme : theme}>
-      <CssBaseline />
+    <ThemeProvider>
       <Router>
         <Box
           sx={{
@@ -31,7 +20,7 @@ const App: React.FC = () => {
             minHeight: "100vh",
           }}
         >
-          <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+          <Header />
 
           <Box component="main" sx={{ flexGrow: 1 }}>
             <Routes>

@@ -1,42 +1,124 @@
-/* Global CSS Reset and Base Styles */
+/* Import Open Sauce fonts */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sauce+One:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;500;600&display=swap");
+
+/* CSS Reset and Base Styles for Matte Design */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
-}
-
-* {
     margin: 0;
     padding: 0;
 }
 
 html {
     scroll-behavior: smooth;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 body {
-    margin: 0;
     font-family:
-        "Roboto",
+        "Open Sauce Sans",
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
-        "Oxygen",
-        "Ubuntu",
-        "Cantarell",
-        "Fira Sans",
-        "Droid Sans",
+        "Roboto",
         "Helvetica Neue",
         sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #1e293b;
+    background-color: #fafbfc;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.5;
     overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    font-feature-settings:
+        "kern" 1,
+        "liga" 1;
 }
 
-code {
-    font-family:
-        source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+/* Headings with Open Sauce One */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Open Sauce One", sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1e293b;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+h3 {
+    font-size: 2.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+h4 {
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+h5 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+h6 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.75rem;
+    }
+    h4 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Text styles */
+p {
+    margin: 0;
+    font-family: "Open Sauce Sans", sans-serif;
+    line-height: 1.7;
+    color: #475569;
+}
+
+strong,
+b {
+    font-weight: 600;
 }
 
 /* Remove default button styles */
@@ -45,47 +127,67 @@ button {
     background: none;
     font-family: inherit;
     cursor: pointer;
+    outline: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Remove default link styles */
 a {
     color: inherit;
     text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Custom scrollbar */
+a:hover {
+    text-decoration: none;
+}
+
+/* Custom scrollbar for matte design */
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background-color: #cbd5e1;
     border-radius: 4px;
+    transition: background-color 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background-color: #64748b;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Firefox scrollbar */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
 }
 
 /* Selection styles */
 ::selection {
-    background-color: rgba(25, 118, 210, 0.2);
+    background-color: rgba(26, 35, 126, 0.15);
     color: inherit;
 }
 
 ::-moz-selection {
-    background-color: rgba(25, 118, 210, 0.2);
+    background-color: rgba(26, 35, 126, 0.15);
     color: inherit;
 }
 
 /* Focus styles for accessibility */
 *:focus-visible {
-    outline: 2px solid #1976d2;
+    outline: 2px solid #1a237e;
     outline-offset: 2px;
+    border-radius: 4px;
 }
 
 /* Disable focus styles for mouse users */
@@ -98,26 +200,218 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+    border-radius: 8px;
 }
 
 /* Remove list styles */
 ul,
 ol {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-/* Form elements */
+/* Form elements styling */
 input,
 textarea,
 select {
-    font-family: inherit;
+    font-family: "Open Sauce Sans", sans-serif;
     font-size: inherit;
+    border-radius: 12px;
+    border: 2px solid #cbd5e1;
+    padding: 12px 16px;
+    background-color: #ffffff;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Smooth transitions for better UX */
+input:hover,
+textarea:hover,
+select:hover {
+    border-color: #2563eb;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #1a237e;
+    box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+}
+
+/* Utility classes for matte design */
+.matte-surface {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.04);
+}
+
+.matte-surface:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(30, 41, 59, 0.08);
+    border-color: #2563eb;
+}
+
+.matte-text-primary {
+    color: #1e293b;
+}
+
+.matte-text-secondary {
+    color: #64748b;
+}
+
+.matte-text-accent {
+    color: #1a237e;
+}
+
+.matte-bg-primary {
+    background-color: #fafbfc;
+}
+
+.matte-bg-paper {
+    background-color: #ffffff;
+}
+
+.matte-bg-elevated {
+    background-color: #f1f5f9;
+}
+
+/* Transitions for better UX */
 * {
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
+    transition-property:
+        background-color, border-color, color, fill, stroke, opacity,
+        box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #0d1321;
+        color: #ffffff;
+    }
+
+    .matte-surface {
+        background: #1e293b;
+        border-color: #334155;
+    }
+
+    .matte-text-primary {
+        color: #ffffff;
+    }
+
+    .matte-text-secondary {
+        color: #cbd5e1;
+    }
+
+    .matte-bg-primary {
+        background-color: #0d1321;
+    }
+
+    .matte-bg-paper {
+        background-color: #1e293b;
+    }
+
+    .matte-bg-elevated {
+        background-color: #334155;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #334155;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #cbd5e1;
+    }
+
+    html {
+        scrollbar-color: #334155 transparent;
+    }
+}
+
+/* Print styles */
+@media print {
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        page-break-after: avoid;
+    }
+
+    p {
+        orphans: 3;
+        widows: 3;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .matte-surface {
+        border-width: 2px;
+        border-color: currentColor;
+    }
+
+    button {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Screen reader only text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
