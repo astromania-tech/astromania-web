@@ -1,30 +1,35 @@
 import { createTheme } from "@mui/material/styles";
 
-// Logo-inspired color palette - extracted from the provided logos
+// Logo-inspired color palette - extracted from AstroMANIA logos
 export const colors = {
-  // Deep navy from the main logo background
-  deepBlue: "#1a237e",
-  navyBlue: "#1e2442",
-  darkNavy: "#0d1321",
+  // Primary blues from logo analysis
+  deepBlue: "#1a237e", // Primary brand blue
+  navyBlue: "#1e293b", // From logo background
+  darkNavy: "#0d1321", // Darkest variant
 
-  // Bright accent blue from logo elements
-  accentBlue: "#2563eb",
-  brightBlue: "#3b82f6",
+  // Accent blues from logo elements
+  accentBlue: "#2563eb", // Bright logo accent
+  brightBlue: "#3b82f6", // Secondary accent
+  steelBlue: "#1e40af", // Professional variant
 
-  // Silver/metallic tones from logo
-  platinum: "#e2e8f0",
-  silver: "#cbd5e1",
-  lightGray: "#f1f5f9",
+  // Metallic/silver tones from logo
+  platinum: "#f8fafc", // Logo body color
+  silver: "#e2e8f0", // Metallic finish
+  lightGray: "#f1f5f9", // Subtle backgrounds
 
   // Matte surfaces
-  matteWhite: "#fafbfc",
-  matteGray: "#f8fafc",
+  matteWhite: "#fafbfc", // Clean backgrounds
+  matteGray: "#f8fafc", // Elevated surfaces
 
   // Dark surfaces for contrast
-  charcoal: "#1e293b",
-  graphite: "#334155",
-  slate: "#475569",
-  darkGray: "#64748b",
+  charcoal: "#1e293b", // From logo charcoal
+  graphite: "#334155", // Medium dark
+  slate: "#475569", // Text secondary
+  darkGray: "#64748b", // Muted text
+
+  // Pure contrast colors
+  logoBlack: "#1a1a1a", // From monochrome logo
+  pureWhite: "#ffffff", // High contrast
 
   // Status colors (minimal, matte)
   success: "#059669",
@@ -446,7 +451,7 @@ export const darkTheme = createTheme({
           backdropFilter: "blur(16px) saturate(180%)",
           borderBottom: `1px solid ${colors.graphite}`,
           color: "#ffffff",
-          boxShadow: "0 1px 3px rgba(0, 0, 0, 0.3)",
+          // boxShadow: "0 1px 3px rgba(0, 0, 0, 0.3)",
         },
       },
     },

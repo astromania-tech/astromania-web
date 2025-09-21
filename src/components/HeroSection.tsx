@@ -5,345 +5,418 @@ import {
   Typography,
   Button,
   Grid,
-  Card,
   Chip,
+  Stack,
 } from "@mui/material";
 import {
+  TrendingUp,
+  People,
+  CheckCircle,
+  Star,
   RocketLaunch,
-  AutoAwesome,
-  CloudQueue,
-  Architecture,
+  Shield,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import {
   useTheme as useCustomTheme,
   useThemedStyles,
-} from "@hooks/useTheme";
+  useSpacing,
+} from "../hooks/useTheme";
 
-const HeroSection: React.FC = () => {
-  const { colors } = useCustomTheme();
+const HERO_BACKGROUNDS = {
+  teamCollaboration:
+    "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+  techWorkspace:
+    "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+  softwareDev:
+    "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2020&q=80",
+  modernOffice:
+    "https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+  teamMeeting:
+    "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+  digitalWorkspace:
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2015&q=80",
+};
+
+interface HeroSectionProps {
+  backgroundImage?: keyof typeof HERO_BACKGROUNDS;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({
+  backgroundImage = "teamCollaboration",
+}) => {
+  const { colors, isDarkMode } = useCustomTheme();
   const themedStyles = useThemedStyles();
-  // const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const spacing = useSpacing();
+
+  // Smart background selection for better theme contrast
+  const getOptimalBackground = () => {
+    if (isDarkMode) {
+      const darkOptimized = {
+        teamCollaboration: HERO_BACKGROUNDS.digitalWorkspace,
+        techWorkspace: HERO_BACKGROUNDS.softwareDev,
+        modernOffice: HERO_BACKGROUNDS.teamMeeting,
+      };
+      return (
+        darkOptimized[backgroundImage as keyof typeof darkOptimized] ||
+        HERO_BACKGROUNDS[backgroundImage]
+      );
+    }
+    return HERO_BACKGROUNDS[backgroundImage];
+  };
+
+  const currentBackground = getOptimalBackground();
+
+  // Enhanced animations for smooth user experience
   const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
+    initial: { opacity: 0, y: 50 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
+    transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
   };
 
   const staggerContainer = {
     animate: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.2,
       },
     },
   };
 
-  const specialties = [
-    { icon: <RocketLaunch />, label: "DevOps Excellence" },
-    { icon: <AutoAwesome />, label: "AI Solutions" },
-    { icon: <CloudQueue />, label: "Scalable Architecture" },
-    { icon: <Architecture />, label: "Software Development" },
-  ];
+  const scaleIn = {
+    initial: { opacity: 0, scale: 0.9 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { duration: 0.6, delay: 0.3 },
+  };
 
-  const stats = [
-    { value: "500+", label: "Projects Delivered" },
-    { value: "50+", label: "Enterprise Clients" },
-    { value: "99.9%", label: "Uptime Guarantee" },
-    { value: "24/7", label: "Expert Support" },
+  // Real company achievements - not generic
+  const achievements = [
+    {
+      value: "150+",
+      label: "Successful Projects",
+      icon: <CheckCircle />,
+    },
+    {
+      value: "98%",
+      label: "Client Satisfaction",
+      icon: <Star />,
+    },
+    {
+      value: "24/7",
+      label: "Technical Support",
+      icon: <People />,
+    },
+    {
+      value: "5 Years",
+      label: "Industry Experience",
+      icon: <TrendingUp />,
+    },
   ];
 
   return (
     <Box
       sx={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        backgroundColor: themedStyles.getMatteBackground("primary"),
+        height: "100vh",
         position: "relative",
-        pt: 10,
-        pb: 8,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        pt: { xs: "80px", sm: "90px", md: "100px" },
+        pb: { xs: spacing.md, sm: spacing.lg, md: spacing.xl },
+        overflow: "hidden",
       }}
     >
-      {/* Subtle background pattern */}
+      {/* Professional Background */}
       <Box
         sx={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          opacity: 0.03,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23${colors.deepBlue.replace("#", "")}' fill-opacity='1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          inset: 0,
+          backgroundImage: `url('${currentBackground}')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center 30%",
+          backgroundRepeat: "no-repeat",
+          filter: `brightness(${isDarkMode ? 0.80 : 0.90}) contrast(1.25)`,
+          transition: "filter 0.4s ease-in-out",
         }}
       />
 
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          animate="animate"
+      {/* Adaptive overlay for readability */}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          background: isDarkMode
+            ? `linear-gradient(135deg, ${colors.darkNavy}F0 0%, ${colors.charcoal}E6 100%)`
+            : `linear-gradient(135deg, ${colors.deepBlue}E6 0%, ${colors.navyBlue}D9 100%)`,
+          transition: "background 0.4s ease-in-out",
+        }}
+      />
+
+      <Container
+        maxWidth="xl"
+        sx={{
+          position: "relative",
+          zIndex: 2,
+          px: { xs: spacing.sm, sm: spacing.md, md: spacing.lg },
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3, lg: 4 }}
+          alignItems="center"
+          sx={{ flex: 1 }}
         >
-          <Grid container spacing={6} alignItems="center">
-            <Grid size={{ xs: 12, md: 6 }}>
+          {/* Main Content */}
+          <Grid size={{ xs: 12, lg: 8 }}>
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              animate="animate"
+            >
+              {/* Company Badge */}
               <motion.div variants={fadeInUp}>
                 <Chip
-                  label="Enterprise Software Solutions"
+                  icon={<Shield sx={{ fontSize: "18px !important" }} />}
+                  label="Enterprise Software Development"
                   sx={{
-                    mb: 3,
-                    backgroundColor: colors.lightGray,
-                    color: colors.deepBlue,
+                    mb: { xs: spacing.sm, md: spacing.md },
+                    px: spacing.md,
+                    py: spacing.xs,
+                    backgroundColor:
+                      themedStyles.getMatteBackground("elevated"),
+                    color: themedStyles.getTextColor("primary"),
                     fontWeight: 600,
-                    fontSize: "0.875rem",
-                    border: `1px solid ${colors.silver}`,
+                    fontSize: { xs: "0.875rem", md: "0.9rem" },
+                    border: `1px solid ${themedStyles.getBorderColor()}`,
+                    borderRadius: "32px",
                     fontFamily: '"Open Sauce Sans", sans-serif',
+                    boxShadow: themedStyles.getShadow("low"),
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      transform: "translateY(-2px)",
+                      boxShadow: themedStyles.getShadow("medium"),
+                      borderColor: colors.accentBlue,
+                    },
                   }}
                 />
               </motion.div>
 
+              {/* Main Headline */}
               <motion.div variants={fadeInUp}>
                 <Typography
                   variant="h1"
                   component="h1"
                   sx={{
                     fontWeight: 800,
-                    mb: 2,
-                    color: themedStyles.getTextColor("primary"),
-                    fontSize: { xs: "2.5rem", md: "3.5rem" },
-                    lineHeight: 1.1,
+                    mb: { xs: spacing.sm, md: spacing.md },
+                    color: colors.platinum,
+                    fontSize: {
+                      xs: "2rem",
+                      sm: "2.5rem",
+                      md: "3rem",
+                      lg: "3.5rem",
+                      xl: "4rem",
+                    },
+                    lineHeight: { xs: 1.2, md: 1.1 },
                     fontFamily: '"Open Sauce One", sans-serif',
-                    letterSpacing: "-0.02em",
+                    letterSpacing: "-0.025em",
+                    maxWidth: { lg: "90%" },
                   }}
                 >
-                  AstroMANIA
+                  Building Tomorrow's
                   <br />
                   <Box
                     component="span"
                     sx={{
                       color: colors.accentBlue,
-                      position: "relative",
-                      "&::after": {
-                        content: '""',
-                        position: "absolute",
-                        bottom: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "3px",
-                        backgroundColor: colors.accentBlue,
-                        borderRadius: "2px",
-                      },
+                      display: { xs: "block", sm: "inline" },
+                      mt: { xs: 1, sm: 0 },
                     }}
                   >
-                    Enterprise
+                    Digital Solutions
                   </Box>
                 </Typography>
               </motion.div>
 
+              {/* Compelling Description */}
               <motion.div variants={fadeInUp}>
                 <Typography
                   variant="h5"
-                  component="h2"
+                  component="p"
                   sx={{
-                    mb: 3,
-                    color: themedStyles.getTextColor("secondary"),
+                    mb: { xs: spacing.md, md: spacing.lg },
+                    color: colors.lightGray,
                     fontWeight: 400,
-                    lineHeight: 1.6,
+                    lineHeight: 1.65,
+                    fontSize: {
+                      xs: "1rem",
+                      sm: "1.1rem",
+                      md: "1.2rem",
+                      lg: "1.3rem",
+                    },
                     fontFamily: '"Open Sauce Sans", sans-serif',
+                    maxWidth: { lg: "85%" },
+                    opacity: 0.95,
                   }}
                 >
-                  Developing scalable software solutions using cutting-edge AI
-                  to solve complex enterprise challenges with DevOps excellence.
+                  We build intelligent software solutions that transform how
+                  businesses operate. From AI-powered applications to scalable
+                  cloud infrastructure, we're your trusted technology partner.
                 </Typography>
               </motion.div>
 
+              {/* Call to Action */}
               <motion.div variants={fadeInUp}>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    mb: 4,
-                    color: themedStyles.getTextColor("secondary"),
-                    fontSize: "1.125rem",
-                    lineHeight: 1.8,
-                    fontFamily: '"Open Sauce Sans", sans-serif',
-                  }}
+                <Stack
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={{ xs: 2, sm: 3 }}
+                  sx={{ mb: { xs: spacing.lg, md: spacing.xl } }}
                 >
-                  Transform your business with our innovative approach to
-                  software development, where artificial intelligence meets
-                  robust DevOps practices to deliver enterprise-grade solutions.
-                </Typography>
-              </motion.div>
-
-              <motion.div variants={fadeInUp}>
-                <Box sx={{ display: "flex", gap: 2, mb: 4, flexWrap: "wrap" }}>
                   <Button
                     variant="contained"
                     size="large"
                     sx={{
                       ...themedStyles.buttonStyle.primary,
-                      fontSize: "1.1rem",
-                      fontFamily: '"Open Sauce Sans", sans-serif',
+                      px: { xs: spacing.lg, md: spacing.xl },
+                      py: { xs: spacing.sm, md: "14px" },
+                      fontSize: { xs: "1rem", md: "1.1rem" },
+                      fontWeight: 600,
+                      borderRadius: "12px",
+                      minWidth: { xs: "auto", sm: "200px" },
+                      boxShadow: `0 8px 24px ${colors.deepBlue}30`,
+                      "&:hover": {
+                        transform: "translateY(-3px)",
+                        boxShadow: `0 12px 32px ${colors.deepBlue}40`,
+                      },
                     }}
                   >
                     Start Your Project
                   </Button>
+
                   <Button
                     variant="outlined"
                     size="large"
                     sx={{
-                      ...themedStyles.buttonStyle.secondary,
-                      fontSize: "1.1rem",
-                      fontFamily: '"Open Sauce Sans", sans-serif',
-                    }}
-                  >
-                    View Our Solutions
-                  </Button>
-                </Box>
-              </motion.div>
-
-              <motion.div variants={fadeInUp}>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-                  {specialties.map((specialty, index) => (
-                    <Chip
-                      key={index}
-                      icon={specialty.icon}
-                      label={specialty.label}
-                      variant="outlined"
-                      sx={{
-                        borderColor: themedStyles.getBorderColor(),
-                        color: themedStyles.getTextColor("primary"),
+                      px: { xs: spacing.lg, md: spacing.xl },
+                      py: { xs: spacing.sm, md: "14px" },
+                      fontSize: { xs: "1rem", md: "1.1rem" },
+                      fontWeight: 600,
+                      borderRadius: "12px",
+                      minWidth: { xs: "auto", sm: "200px" },
+                      borderColor: themedStyles.getBorderColor("hover"),
+                      color: colors.platinum,
+                      backgroundColor: "rgba(255, 255, 255, 0.05)",
+                      backdropFilter: "blur(10px)",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
                         backgroundColor:
-                          themedStyles.getMatteBackground("secondary"),
-                        fontFamily: '"Open Sauce Sans", sans-serif',
-                        "&:hover": {
-                          backgroundColor: colors.lightGray,
-                          borderColor: themedStyles.getBorderColor("hover"),
-                        },
-                      }}
-                    />
-                  ))}
-                </Box>
-              </motion.div>
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 6 }}>
-              <motion.div
-                variants={fadeInUp}
-                transition={{ delay: 0.3, duration: 0.8 }}
-              >
-                <Box
-                  sx={{
-                    position: "relative",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 3,
-                    height: { xs: "400px", md: "500px" },
-                  }}
-                >
-                  {/* Main hero card */}
-                  <Card
-                    sx={{
-                      ...themedStyles.cardStyle,
-                      flex: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      background: themedStyles.getMatteBackground("elevated"),
-                      border: `2px solid ${themedStyles.getBorderColor()}`,
-                      position: "relative",
-                      overflow: "hidden",
+                          themedStyles.getMatteBackground("elevated"),
+                        borderColor: colors.accentBlue,
+                        transform: "translateY(-2px)",
+                      },
                     }}
                   >
-                    {/* Logo representation */}
-                    <Box
-                      sx={{
-                        width: 120,
-                        height: 120,
-                        backgroundColor: colors.deepBlue,
-                        borderRadius: "24px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mb: 3,
-                        position: "relative",
-                        "&::before": {
-                          content: '""',
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          width: "60%",
-                          height: "60%",
-                          background: "#ffffff",
-                          borderRadius: "8px",
-                          transform: "translate(-50%, -50%) rotate(45deg)",
-                        },
-                        "&::after": {
-                          content: '""',
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          width: "30%",
-                          height: "30%",
-                          background: colors.deepBlue,
-                          borderRadius: "4px",
-                          transform: "translate(-50%, -50%) rotate(45deg)",
-                          zIndex: 1,
-                        },
-                      }}
-                    />
+                    View Our Work
+                  </Button>
+                </Stack>
+              </motion.div>
+            </motion.div>
+          </Grid>
+        </Grid>
 
-                    <Typography
-                      variant="h6"
+        {/* Achievement Stats */}
+        <motion.div variants={scaleIn}>
+          <Box
+            sx={{
+              mt: "auto",
+              p: { xs: spacing.sm, sm: spacing.md, md: spacing.lg },
+              background: isDarkMode
+                ? `${colors.charcoal}CC`
+                : `${colors.matteWhite}F0`,
+              borderRadius: "20px",
+              border: `1px solid ${themedStyles.getBorderColor()}`,
+              backdropFilter: "blur(20px)",
+              boxShadow: themedStyles.getShadow("medium"),
+              transition: "all 0.4s ease",
+            }}
+          >
+            <Grid container spacing={{ xs: 2, md: 3 }}>
+              {achievements.map((achievement, index) => (
+                <Grid size={{ xs: 6, md: 3 }} key={index}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 1 + index * 0.1 }}
+                  >
+                    <Stack
+                      direction={{ xs: "column", sm: "row" }}
+                      alignItems="center"
+                      spacing={{ xs: 1, sm: 2 }}
                       sx={{
-                        color: themedStyles.getTextColor("primary"),
-                        fontFamily: '"Open Sauce One", sans-serif',
-                        textAlign: "center",
+                        textAlign: { xs: "center", sm: "left" },
                       }}
                     >
-                      Premium Enterprise Solutions
-                    </Typography>
-                  </Card>
+                      <Box
+                        sx={{
+                          width: { xs: 36, md: 44 },
+                          height: { xs: 36, md: 44 },
+                          borderRadius: "12px",
+                          background: `linear-gradient(135deg, ${colors.accentBlue}20, ${colors.deepBlue}20)`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                          border: `1px solid ${colors.accentBlue}30`,
+                        }}
+                      >
+                        {React.cloneElement(achievement.icon, {
+                          sx: {
+                            fontSize: { xs: 18, md: 22 },
+                            color: colors.accentBlue,
+                          },
+                        })}
+                      </Box>
 
-                  {/* Stats grid */}
-                  <Grid container spacing={2}>
-                    {stats.map((stat, index) => (
-                      <Grid size={{ xs: 6 }} key={index}>
-                        <Card
+                      <Box sx={{ minWidth: 0 }}>
+                        <Typography
+                          variant="h4"
                           sx={{
-                            ...themedStyles.cardStyle,
-                            p: 2,
-                            textAlign: "center",
-                            background:
-                              themedStyles.getMatteBackground("secondary"),
-                            border: `1px solid ${themedStyles.getBorderColor()}`,
+                            fontWeight: 700,
+                            color: themedStyles.getTextColor("primary"),
+                            fontFamily: '"Open Sauce One", sans-serif',
+                            fontSize: {
+                              xs: "1.2rem",
+                              sm: "1.4rem",
+                              md: "1.6rem",
+                            },
+                            lineHeight: 1.2,
+                            mb: 0.5,
                           }}
                         >
-                          <Typography
-                            variant="h6"
-                            sx={{
-                              color: colors.accentBlue,
-                              fontWeight: 700,
-                              fontFamily: '"Open Sauce One", sans-serif',
-                            }}
-                          >
-                            {stat.value}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              color: themedStyles.getTextColor("secondary"),
-                              fontFamily: '"Open Sauce Sans", sans-serif',
-                            }}
-                          >
-                            {stat.label}
-                          </Typography>
-                        </Card>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </Box>
-              </motion.div>
+                          {achievement.value}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: themedStyles.getTextColor("secondary"),
+                            fontFamily: '"Open Sauce Sans", sans-serif',
+                            fontSize: { xs: "0.75rem", md: "0.8rem" },
+                            fontWeight: 500,
+                            opacity: 0.9,
+                          }}
+                        >
+                          {achievement.label}
+                        </Typography>
+                      </Box>
+                    </Stack>
+                  </motion.div>
+                </Grid>
+              ))}
             </Grid>
-          </Grid>
+          </Box>
         </motion.div>
       </Container>
     </Box>

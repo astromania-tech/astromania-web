@@ -8,4 +8,6 @@ export interface ThemeContextType {
   currentTheme: typeof theme;
 }
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined,
+);
