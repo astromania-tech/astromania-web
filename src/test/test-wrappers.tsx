@@ -5,7 +5,7 @@ import {
   createTheme,
 } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import { ThemeProvider } from "@/contexts/ThemeProvider";
+import { ThemeProvider } from "@contexts/ThemeProvider";
 
 // Create a test theme
 const testTheme = createTheme({

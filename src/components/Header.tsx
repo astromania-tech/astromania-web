@@ -20,7 +20,7 @@ import {
   Brightness7,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useTheme, useThemedStyles } from "../hooks/useTheme";
+import { useTheme, useThemedStyles } from "@hooks/useTheme";
 import Logo from "./Logo";
 
 const Header: React.FC = () => {

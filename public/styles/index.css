@@ -1,5 +1,5 @@
 /* Import local Open Sauce fonts */
-@import './styles/fonts.css';
+@import './fonts.css';
 
 /* Remove these Google Fonts imports:
 @import url("https://fonts.googleapis.com/css2?family=Open+Sauce+One:wght@400;600;700&display=swap");

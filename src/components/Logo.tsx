@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { colors } from "../theme/theme";
+import { colors } from "@theme/theme";
 
 interface LogoProps {
   size?: "small" | "medium" | "large";

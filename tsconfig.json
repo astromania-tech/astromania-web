@@ -43,7 +43,8 @@
       "@services/*": ["src/services/*"],
       "@types/*": ["src/types/*"],
       "@theme/*": ["src/theme/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@styles/*": ["public/styles/*"]
     },
 
     /* Type Definitions */
@@ -54,6 +55,6 @@
       "@testing-library/jest-dom"
     ]
   },
-  "include": ["src", "vite.config.ts", "vitest.config.ts"],
+  "include": ["src", "vite.config.ts", "vitest.config.ts", "public/styles"],
   "exclude": ["node_modules", "build", "dist"]
 }

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { theme, colors } from "../theme/theme";
+import { theme, colors } from "@theme/theme";
 
 export interface ThemeContextType {
   isDarkMode: boolean;
