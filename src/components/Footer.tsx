@@ -18,6 +18,7 @@ import {
   LocationOn,
   ArrowUpward,
 } from "@mui/icons-material";
+import Logo from "./Logo";
 
 const Footer: React.FC = () => {
   const theme = useTheme();
@@ -87,19 +88,22 @@ const Footer: React.FC = () => {
         <Grid container spacing={4}>
           {/* Company Info */}
           <Grid size={{ xs: 12, md: 4 }}>
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: "bold",
-                mb: 2,
-                background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              AstroMANIA
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+              <Logo size="medium" variant="footer" showText={false} />
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: "bold",
+                  ml: 2,
+                  background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                AstroMANIA
+              </Typography>
+            </Box>
             <Typography
               variant="body1"
               sx={{

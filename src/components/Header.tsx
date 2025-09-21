@@ -57,7 +57,11 @@ const Header: React.FC = () => {
           borderBottom: `1px solid ${themedStyles.getBorderColor()}`,
         }}
       >
-        <Logo size="small" onClick={() => handleNavigation("/")} />
+        <Logo
+          size="small"
+          variant="header"
+          onClick={() => handleNavigation("/")}
+        />
         <IconButton onClick={handleDrawerToggle}>
           <CloseIcon />
         </IconButton>
@@ -107,7 +111,7 @@ const Header: React.FC = () => {
         <Container maxWidth="xl">
           <Toolbar sx={{ justifyContent: "space-between", py: 1 }}>
             {/* Logo */}
-            <Logo onClick={() => handleNavigation("/")} />
+            <Logo variant="header" onClick={() => handleNavigation("/")} />
 
             {/* Desktop Navigation */}
             {!isMobile && (
