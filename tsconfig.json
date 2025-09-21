@@ -29,7 +29,7 @@
 
     /* Build Performance */
     "incremental": true,
-    "tsBuildInfoFile": ".tsbuildinfo",
+    "tsBuildInfoFile": "build/.tsbuildinfo",
 
     /* Path Mapping */
     "baseUrl": ".",
@@ -38,6 +38,10 @@
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
       "@contexts/*": ["src/contexts/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@utils/*": ["src/utils/*"],
+      "@services/*": ["src/services/*"],
+      "@types/*": ["src/types/*"],
       "@theme/*": ["src/theme/*"],
       "@assets/*": ["src/assets/*"]
     },

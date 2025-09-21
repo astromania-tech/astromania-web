@@ -1,6 +1,10 @@
-/* Import Open Sauce fonts */
+/* Import local Open Sauce fonts */
+@import './styles/fonts.css';
+
+/* Remove these Google Fonts imports:
 @import url("https://fonts.googleapis.com/css2?family=Open+Sauce+One:wght@400;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;500;600&display=swap");
+*/
 
 /* CSS Reset and Base Styles for Matte Design */
 *,

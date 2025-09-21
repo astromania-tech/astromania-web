@@ -1,74 +1,13 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { render, RenderOptions } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import {
-  ThemeProvider as MuiThemeProvider,
-  createTheme,
-} from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
 import { vi } from "vitest";
-import { ThemeProvider } from "../contexts/ThemeContext";
-
-// Create a test theme
-const testTheme = createTheme({
-  palette: {
-    mode: "light",
-    primary: {
-      main: "#1976d2",
-    },
-    secondary: {
-      main: "#dc004e",
-    },
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 900,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-});
-
-// All the providers wrapper
-const AllTheProviders: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  return (
-    <MemoryRouter>
-      <ThemeProvider>
-        <MuiThemeProvider theme={testTheme}>
-          <CssBaseline />
-          {children}
-        </MuiThemeProvider>
-      </ThemeProvider>
-    </MemoryRouter>
-  );
-};
+import { AllTheProviders, RouterWrapper, ThemeWrapper } from "./test-wrappers";
 
 // Custom render function
-const customRender = (
+export const customRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions, "wrapper">,
 ) => render(ui, { wrapper: AllTheProviders, ...options });
-
-// Router-only wrapper for components that need routing but not theme
-const RouterWrapper: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => <MemoryRouter>{children}</MemoryRouter>;
-
-// Theme-only wrapper for components that need theme but not routing
-const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => (
-  <ThemeProvider>
-    <MuiThemeProvider theme={testTheme}>
-      <CssBaseline />
-      {children}
-    </MuiThemeProvider>
-  </ThemeProvider>
-);
 
 // Custom render with only router
 const renderWithRouter = (
@@ -139,3 +78,6 @@ export { default as userEvent } from "@testing-library/user-event";
 
 // Re-export our custom render as the default render
 export { customRender as render, renderWithRouter, renderWithTheme };
+
+// Re-export test wrappers for convenience
+export { AllTheProviders, RouterWrapper, ThemeWrapper } from "./test-wrappers";

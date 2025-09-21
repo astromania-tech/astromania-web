@@ -18,7 +18,7 @@ import { motion } from "framer-motion";
 import {
   useTheme as useCustomTheme,
   useThemedStyles,
-} from "../contexts/ThemeContext";
+} from "../hooks/useTheme";
 
 const HeroSection: React.FC = () => {
   const { colors } = useCustomTheme();
