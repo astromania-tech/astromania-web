@@ -12,7 +12,7 @@ export const useTheme = (): ThemeContextType => {
 
 // Custom hook for accessing colors directly
 export const useColors = () => {
-  const { colors: contextColors } = useTheme();
+  // const { colors: contextColors } = useTheme();
   // Return colors from theme.ts to ensure synchronization
   return colors;
 };
@@ -124,7 +124,7 @@ export const useThemedStyles = () => {
     },
 
     // Utility functions for dynamic theming
-    getTextColor: (variant: "primary" | "secondary" | ["accent", "visible"] = "primary" ) => {
+    getTextColor: (variant: "primary" | "secondary" | "accent" = "primary" ) => {
       switch (variant) {
         case "primary":
           return isDarkMode ? colors.pureWhite : colors.charcoal;
@@ -132,8 +132,6 @@ export const useThemedStyles = () => {
           return isDarkMode ? colors.silver : colors.darkGray;
         case "accent":
           return isDarkMode ? colors.accentBlue : colors.deepBlue;
-        case "visible":
-          return isDarkMode ? colors.matteWhite : colors.platinum;
         default:
           return isDarkMode ? colors.pureWhite : colors.charcoal;
       }

@@ -13,7 +13,6 @@ import {
   People,
   CheckCircle,
   Star,
-  RocketLaunch,
   Shield,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";

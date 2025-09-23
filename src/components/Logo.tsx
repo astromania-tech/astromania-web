@@ -92,7 +92,7 @@ const Logo: React.FC<LogoProps> = ({
   // Light mode: Uses full color version
   const logoSrc = isDarkMode
     ? "/images/logo/astroMania-logo-bw.png"
-    : "/images/logo/astroMania-logo-color.jpeg";
+    : "/images/logo/astroMania-logo-color.png";
 
   const logoAlt = "AstroMANIA Enterprise Logo";
 
