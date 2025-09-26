@@ -180,6 +180,10 @@ const Header: React.FC = () => {
         sx={{
           display: "flex",
           mt: 1,
+          width: "100vw", // Full viewport width
+          left: 0, // Ensure it starts from left edge
+          right: 0, // Ensure it extends to right edge
+          padding: 0, // Remove default AppBar padding
           // Glassmorphism background with transparency and blur
           backgroundColor: isDarkMode
             ? "unset" // Dark navy with 95% opacity
@@ -190,7 +194,7 @@ const Header: React.FC = () => {
           borderRadius: "0 0 30px 30px", // No border radius for full-width header
         }}
       >
-        <Container maxWidth={isMobile? "md" : "xl"}>
+        <Container maxWidth={isMobile ? false : "xl"} sx={{ px: 0 }}>
           <Toolbar sx={{ justifyContent: "space-between", py: 1.5 }}>
             {/* Desktop Navigation - Hidden on mobile */}
             {!isMobile && (
@@ -205,7 +209,6 @@ const Header: React.FC = () => {
                 {/* Left Pill: Logo + Navigation Container - Okta-inspired */}
                 <Box
                   sx={{
-                    // mt: 1.5,
                     display: "flex",
                     alignItems: "center",
                     // Glassmorphism container background
@@ -426,16 +429,17 @@ const Header: React.FC = () => {
               >
                 <Box
                   sx={{
+                    // mt: 1.5,
                     display: "flex",
                     width: "100%",
-                    justifyContent: "space-between",
                     alignItems: "center",
+                    justifyContent: "space-between",
                     // Glassmorphism container background
                     backgroundColor: isDarkMode
-                      ? "rgba(51, 65, 85, 0.6)" // Dark slate with transparency
-                      : "rgba(248, 250, 252, 0.8)", // Light background with transparency
-                    borderRadius: "35px", // Full pill shape
-                    padding: "5px 15px",
+                      ? "rgba(51, 65, 85, 0.9)" // Dark slate with transparency
+                      : "rgba(248, 250, 252, 0.9)", // Light background with transparency
+                    borderRadius: "64px", // Full pill shape
+                    padding: "5px 10px",
                     boxShadow: themedStyles.getShadow("medium"), // Medium shadow for depth
                     // Subtle borders for definition
                     border: `1px solid ${
@@ -443,8 +447,6 @@ const Header: React.FC = () => {
                         ? "rgba(71, 85, 105, 0.3)" // Dark border
                         : "rgba(226, 232, 240, 0.5)" // Light border
                     }`,
-                    backdropFilter: "blur(12px)", // Additional blur for depth
-                    gap: 1, // Space between logo and navigation buttons
                   }}
                 >
                   <Logo

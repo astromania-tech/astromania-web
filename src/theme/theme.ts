@@ -1,6 +1,85 @@
 import { createTheme } from "@mui/material/styles";
-import "./types"; // Import theme type extensions
-import { FONT_WEIGHTS, FONT_FAMILIES } from "./types";
+
+// Extend MUI Theme interface to include custom font tokens
+declare module "@mui/material/styles" {
+  interface Theme {
+    fontTokens: {
+      display: {
+        ultraLight: string;
+        light: string;
+        regular: string;
+        bold: string;
+        black: string;
+      };
+      heading: {
+        light: string;
+        semiBold: string;
+        bold: string;
+      };
+      body: {
+        regular: string;
+        medium: string;
+        semiBold: string;
+      };
+      special: {
+        logo: string;
+        accent: string;
+        code: string;
+      };
+      fallback: string;
+    };
+  }
+
+  interface ThemeOptions {
+    fontTokens?: {
+      display?: {
+        ultraLight?: string;
+        light?: string;
+        regular?: string;
+        bold?: string;
+        black?: string;
+      };
+      heading?: {
+        light?: string;
+        semiBold?: string;
+        bold?: string;
+      };
+      body?: {
+        regular?: string;
+        medium?: string;
+        semiBold?: string;
+      };
+      special?: {
+        logo?: string;
+        accent?: string;
+        code?: string;
+      };
+      fallback?: string;
+    };
+  }
+}
+
+// Font weight constants for consistent usage
+export const FONT_WEIGHTS = {
+  thin: 100,
+  extraLight: 200,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  semiBold: 600,
+  bold: 700,
+  extraBold: 800,
+  black: 900,
+} as const;
+
+// Font family constants for type safety
+export const FONT_FAMILIES = {
+  lufga: "Lufga",
+  openSauceOne: "Open Sauce One",
+  openSauceSans: "Open Sauce Sans",
+  poppins: "Poppins",
+  montserrat: "Montserrat"
+} as const;
 
 // Logo-inspired color palette - extracted from AstroMANIA logos
 export const colors = {
@@ -89,21 +168,21 @@ export const theme = createTheme({
 
     // Heading fonts for section headers
     heading: {
-      light: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 400
-      semiBold: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 600
-      bold: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 700
+      light: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 400
+      semiBold: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 600
+      bold: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 700
     },
 
     // Body fonts for readable text
     body: {
-      regular: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 400
-      medium: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 500
-      semiBold: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 600
+      regular: `"${FONT_FAMILIES.poppins}", "${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 400
+      medium: `"${FONT_FAMILIES.poppins}", "${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 500
+      semiBold: `"${FONT_FAMILIES.poppins}", "${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 600
     },
 
     // Special purpose fonts
     special: {
-      logo: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.righteous}", "${FONT_FAMILIES.asimovian}", sans-serif`, // For branding (Logo text)
+      logo: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.openSauceOne}", sans-serif`, // For branding (Logo text)
       accent: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceOne}", sans-serif`, // For highlights
       code: '"JetBrains Mono", "Fira Code", "Monaco", monospace', // For code blocks
     },
@@ -114,7 +193,7 @@ export const theme = createTheme({
   },
   typography: {
     // Base font family hierarchy with proper fallbacks
-    fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceSans}", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`,
+    fontFamily: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceSans}", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`,
 
     // Display typography (Hero sections, large impact text)
     h1: {
@@ -122,7 +201,7 @@ export const theme = createTheme({
       fontWeight: FONT_WEIGHTS.black, // Lufga Black for maximum impact
       lineHeight: 1.1,
       letterSpacing: "-0.02em",
-      fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceOne}", sans-serif`,
+      fontFamily: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceOne}", sans-serif`,
       color: colors.charcoal,
     },
     h2: {
@@ -130,7 +209,7 @@ export const theme = createTheme({
       fontWeight: FONT_WEIGHTS.extraBold, // Lufga ExtraBold for strong hierarchy
       lineHeight: 1.2,
       letterSpacing: "-0.01em",
-      fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceOne}", sans-serif`,
+      fontFamily: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceOne}", sans-serif`,
       color: colors.charcoal,
     },
     h3: {
@@ -138,7 +217,7 @@ export const theme = createTheme({
       fontWeight: FONT_WEIGHTS.bold, // Bold for section headers
       lineHeight: 1.3,
       letterSpacing: "-0.01em",
-      fontFamily: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`,
+      fontFamily: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.charcoal,
     },
     h4: {
@@ -146,7 +225,7 @@ export const theme = createTheme({
       fontWeight: FONT_WEIGHTS.semiBold, // SemiBold for subsection headers
       lineHeight: 1.4,
       letterSpacing: "0em",
-      fontFamily: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`,
+      fontFamily: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.charcoal,
     },
     h5: {
@@ -154,7 +233,7 @@ export const theme = createTheme({
       fontWeight: FONT_WEIGHTS.semiBold,
       lineHeight: 1.5,
       letterSpacing: "0em",
-      fontFamily: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`,
+      fontFamily: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.charcoal,
     },
     h6: {
@@ -162,7 +241,7 @@ export const theme = createTheme({
       fontWeight: FONT_WEIGHTS.medium, // Medium for smaller headings
       lineHeight: 1.6,
       letterSpacing: "0em",
-      fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceSans}", sans-serif`,
+      fontFamily: `"${FONT_FAMILIES.montserrat}", "${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceSans}", sans-serif`,
       color: colors.charcoal,
     },
 
@@ -171,14 +250,14 @@ export const theme = createTheme({
       fontSize: "1rem",
       lineHeight: 1.7,
       letterSpacing: "0em",
-      fontFamily: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`,
+      fontFamily: `"${FONT_FAMILIES.poppins}", "${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.slate,
     },
     body2: {
       fontSize: "0.875rem",
       lineHeight: 1.6,
       letterSpacing: "0em",
-      fontFamily: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`,
+      fontFamily: `"${FONT_FAMILIES.poppins}", "${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.darkGray,
     },
 

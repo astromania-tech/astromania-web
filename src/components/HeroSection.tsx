@@ -177,7 +177,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             >
               {/* Company Badge */}
               <motion.div variants={fadeInUp}>
-                <Chip
+                {/*<Chip
                   icon={<Shield sx={{ fontSize: "18px !important" }} />}
                   label="Enterprise Software Development"
                   sx={{
@@ -200,7 +200,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                       borderColor: colors.accentBlue,
                     },
                   }}
-                />
+                />*/}
               </motion.div>
 
               {/* Main Headline */}
