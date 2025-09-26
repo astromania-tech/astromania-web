@@ -5,7 +5,7 @@ import {
   Typography,
   Button,
   Grid,
-  Chip,
+  // Chip,
   Stack,
 } from "@mui/material";
 import {
@@ -13,7 +13,7 @@ import {
   People,
   CheckCircle,
   Star,
-  Shield,
+  // Shield,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import {
