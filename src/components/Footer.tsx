@@ -89,8 +89,8 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <Grid size={{ xs: 12, md: 4 }}>
             <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-              <Logo size="medium" variant="footer" showText={false} />
-              <Typography
+              <Logo size="large" variant="footer" showText={true} />
+              {/*<Typography
                 variant="h4"
                 sx={{
                   fontWeight: "bold",
@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
                 }}
               >
                 AstroMANIA
-              </Typography>
+              </Typography>*/}
             </Box>
             <Typography
               variant="body1"

@@ -1,4 +1,6 @@
 import { createTheme } from "@mui/material/styles";
+import "./types"; // Import theme type extensions
+import { FONT_WEIGHTS, FONT_FAMILIES } from "./types";
 
 // Logo-inspired color palette - extracted from AstroMANIA logos
 export const colors = {
@@ -75,84 +77,152 @@ export const theme = createTheme({
       main: colors.success,
     },
   },
+  fontTokens: {
+    // Display fonts for hero sections and major headings
+    display: {
+      ultraLight: `"${FONT_FAMILIES.lufga}", sans-serif`, // Weight 100 - for ethereal, light text
+      light: `"${FONT_FAMILIES.lufga}", sans-serif`, // Weight 300 - for elegant headers
+      regular: `"${FONT_FAMILIES.lufga}", sans-serif`, // Weight 400 - for balanced display text
+      bold: `"${FONT_FAMILIES.lufga}", sans-serif`, // Weight 700 - for strong display text
+      black: `"${FONT_FAMILIES.lufga}", sans-serif`, // Weight 900 - for maximum impact
+    },
+
+    // Heading fonts for section headers
+    heading: {
+      light: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 400
+      semiBold: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 600
+      bold: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 700
+    },
+
+    // Body fonts for readable text
+    body: {
+      regular: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 400
+      medium: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 500
+      semiBold: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`, // Weight 600
+    },
+
+    // Special purpose fonts
+    special: {
+      logo: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.righteous}", "${FONT_FAMILIES.asimovian}", sans-serif`, // For branding (Logo text)
+      accent: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceOne}", sans-serif`, // For highlights
+      code: '"JetBrains Mono", "Fira Code", "Monaco", monospace', // For code blocks
+    },
+
+    // Fallback chain for all fonts
+    fallback:
+      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+  },
   typography: {
-    fontFamily:
-      '"Open Sauce One", "Open Sauce Sans", "Inter", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", sans-serif',
+    // Base font family hierarchy with proper fallbacks
+    fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceSans}", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`,
+
+    // Display typography (Hero sections, large impact text)
     h1: {
       fontSize: "3.5rem",
-      fontWeight: 700,
+      fontWeight: FONT_WEIGHTS.black, // Lufga Black for maximum impact
       lineHeight: 1.1,
       letterSpacing: "-0.02em",
-      fontFamily: '"Open Sauce One", sans-serif',
+      fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceOne}", sans-serif`,
       color: colors.charcoal,
     },
     h2: {
       fontSize: "2.75rem",
-      fontWeight: 700,
+      fontWeight: FONT_WEIGHTS.extraBold, // Lufga ExtraBold for strong hierarchy
       lineHeight: 1.2,
       letterSpacing: "-0.01em",
-      fontFamily: '"Open Sauce One", sans-serif',
+      fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceOne}", sans-serif`,
       color: colors.charcoal,
     },
     h3: {
       fontSize: "2.25rem",
-      fontWeight: 600,
+      fontWeight: FONT_WEIGHTS.bold, // Bold for section headers
       lineHeight: 1.3,
       letterSpacing: "-0.01em",
-      fontFamily: '"Open Sauce One", sans-serif',
+      fontFamily: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.charcoal,
     },
     h4: {
       fontSize: "1.875rem",
-      fontWeight: 600,
+      fontWeight: FONT_WEIGHTS.semiBold, // SemiBold for subsection headers
       lineHeight: 1.4,
       letterSpacing: "0em",
-      fontFamily: '"Open Sauce One", sans-serif',
+      fontFamily: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.charcoal,
     },
     h5: {
       fontSize: "1.5rem",
-      fontWeight: 600,
+      fontWeight: FONT_WEIGHTS.semiBold,
       lineHeight: 1.5,
       letterSpacing: "0em",
-      fontFamily: '"Open Sauce One", sans-serif',
+      fontFamily: `"${FONT_FAMILIES.openSauceOne}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.charcoal,
     },
     h6: {
       fontSize: "1.25rem",
-      fontWeight: 600,
+      fontWeight: FONT_WEIGHTS.medium, // Medium for smaller headings
       lineHeight: 1.6,
       letterSpacing: "0em",
-      fontFamily: '"Open Sauce One", sans-serif',
+      fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceSans}", sans-serif`,
       color: colors.charcoal,
     },
+
+    // Body text typography
     body1: {
       fontSize: "1rem",
       lineHeight: 1.7,
       letterSpacing: "0em",
-      fontFamily: '"Open Sauce Sans", sans-serif',
+      fontFamily: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.slate,
     },
     body2: {
       fontSize: "0.875rem",
       lineHeight: 1.6,
       letterSpacing: "0em",
-      fontFamily: '"Open Sauce Sans", sans-serif',
+      fontFamily: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.darkGray,
     },
+
+    // Interactive elements
     button: {
       fontSize: "0.875rem",
-      fontWeight: 600,
+      fontWeight: FONT_WEIGHTS.semiBold,
       letterSpacing: "0.02em",
       textTransform: "none" as const,
-      fontFamily: '"Open Sauce Sans", sans-serif',
+      fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceSans}", sans-serif`,
     },
     caption: {
       fontSize: "0.75rem",
       lineHeight: 1.5,
       letterSpacing: "0.03em",
-      fontFamily: '"Open Sauce Sans", sans-serif',
+      fontFamily: `"${FONT_FAMILIES.openSauceSans}", "${FONT_FAMILIES.lufga}", sans-serif`,
       color: colors.darkGray,
+    },
+
+    // Custom semantic typography variants
+    // These extend MUI's typography system for specific use cases
+    subtitle1: {
+      fontSize: "1.125rem",
+      fontWeight: FONT_WEIGHTS.medium,
+      lineHeight: 1.6,
+      letterSpacing: "0em",
+      fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceSans}", sans-serif`,
+      color: colors.slate,
+    },
+    subtitle2: {
+      fontSize: "1rem",
+      fontWeight: FONT_WEIGHTS.regular,
+      lineHeight: 1.5,
+      letterSpacing: "0.01em",
+      fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceSans}", sans-serif`,
+      color: colors.darkGray,
+    },
+    overline: {
+      fontSize: "0.75rem",
+      fontWeight: FONT_WEIGHTS.bold,
+      letterSpacing: "0.08em",
+      textTransform: "uppercase" as const,
+      fontFamily: `"${FONT_FAMILIES.lufga}", "${FONT_FAMILIES.openSauceSans}", sans-serif`,
+      color: colors.accentBlue,
     },
   },
   shape: {
@@ -192,7 +262,7 @@ export const theme = createTheme({
         body: {
           background: colors.matteWhite,
           color: colors.charcoal,
-          fontFamily: '"Open Sauce Sans", sans-serif',
+          // Use theme font token instead of hardcoded family
         },
         "*": {
           scrollbarWidth: "thin",
@@ -375,26 +445,9 @@ export const theme = createTheme({
     },
     MuiTypography: {
       styleOverrides: {
+        // Remove individual font family overrides - now handled by theme typography
         root: {
-          fontFamily: '"Open Sauce Sans", sans-serif',
-        },
-        h1: {
-          fontFamily: '"Open Sauce One", sans-serif',
-        },
-        h2: {
-          fontFamily: '"Open Sauce One", sans-serif',
-        },
-        h3: {
-          fontFamily: '"Open Sauce One", sans-serif',
-        },
-        h4: {
-          fontFamily: '"Open Sauce One", sans-serif',
-        },
-        h5: {
-          fontFamily: '"Open Sauce One", sans-serif',
-        },
-        h6: {
-          fontFamily: '"Open Sauce One", sans-serif',
+          // Font family comes from theme typography variants
         },
       },
     },
@@ -434,7 +487,7 @@ export const darkTheme = createTheme({
         body: {
           background: colors.darkNavy,
           color: "#ffffff",
-          fontFamily: '"Open Sauce Sans", sans-serif',
+          // Use theme font token instead of hardcoded family
         },
         "*::-webkit-scrollbar-thumb": {
           backgroundColor: colors.graphite,
@@ -451,7 +504,7 @@ export const darkTheme = createTheme({
           backdropFilter: "blur(16px) saturate(180%)",
           borderBottom: `1px solid ${colors.graphite}`,
           color: "#ffffff",
-          // boxShadow: "0 1px 3px rgba(0, 0, 0, 0.3)",
+          boxShadow: "0 1px 3px rgba(0, 0, 0, 0.3)",
         },
       },
     },

@@ -91,8 +91,8 @@ const Logo: React.FC<LogoProps> = ({
   // Dark mode: Uses black & white version for better contrast
   // Light mode: Uses full color version
   const logoSrc = isDarkMode
-    ? "/images/logo/astroMania-logo-bw.png"
-    : "/images/logo/astroMania-logo-color.png";
+    ? "/images/logo/astromania-logo-dark.png"
+    : "/images/logo/astromania-logo-light.png";
 
   const logoAlt = "AstroMANIA Enterprise Logo";
 
@@ -160,8 +160,8 @@ const Logo: React.FC<LogoProps> = ({
           variant="h5"
           component="div"
           sx={{
-            fontFamily: '"Open Sauce One", sans-serif',
-            fontWeight: 700,
+            fontFamily: (theme) => theme.fontTokens.special.logo,
+            fontWeight: 800,
             color: isDarkMode ? "#ffffff" : colors.deepBlue,
             letterSpacing: "-0.01em",
             fontSize: currentSize.text,

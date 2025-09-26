@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, Container, Typography, Grid, Paper, Divider } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Paper,
+  Divider,
+} from "@mui/material";
 import Logo from "./Logo";
 import { useTheme } from "@hooks/useTheme";
 
@@ -43,9 +50,18 @@ const LogoDemo: React.FC = () => {
       title: "Image Only Mode",
       description: "Just the logo image without wrapper styling",
       items: [
-        { props: { imageOnly: true, size: "small" as const }, label: "Image Only - Small" },
-        { props: { imageOnly: true, size: "medium" as const }, label: "Image Only - Medium" },
-        { props: { imageOnly: true, size: "large" as const }, label: "Image Only - Large" },
+        {
+          props: { imageOnly: true, size: "small" as const },
+          label: "Image Only - Small",
+        },
+        {
+          props: { imageOnly: true, size: "medium" as const },
+          label: "Image Only - Medium",
+        },
+        {
+          props: { imageOnly: true, size: "large" as const },
+          label: "Image Only - Large",
+        },
       ],
     },
     {
@@ -55,17 +71,17 @@ const LogoDemo: React.FC = () => {
         {
           props: {
             onClick: () => alert("Logo clicked!"),
-            size: "medium" as const
+            size: "medium" as const,
           },
-          label: "Clickable Logo"
+          label: "Clickable Logo",
         },
         {
           props: {
             onClick: () => alert("Header logo clicked!"),
             variant: "header" as const,
-            size: "medium" as const
+            size: "medium" as const,
           },
-          label: "Clickable Header Variant"
+          label: "Clickable Header Variant",
         },
       ],
     },
@@ -77,24 +93,24 @@ const LogoDemo: React.FC = () => {
           props: {
             size: "small" as const,
             variant: "header" as const,
-            onClick: () => console.log("Navigation home")
+            onClick: () => alert("Navigation home"),
           },
-          label: "Navigation Logo"
+          label: "Navigation Logo",
         },
         {
           props: {
             size: "medium" as const,
             variant: "footer" as const,
-            showText: false
+            showText: false,
           },
-          label: "Footer Logo"
+          label: "Footer Logo",
         },
         {
           props: {
             size: "large" as const,
-            imageOnly: true
+            imageOnly: true,
           },
-          label: "Hero Section Logo"
+          label: "Hero Section Logo",
         },
       ],
     },
@@ -109,7 +125,7 @@ const LogoDemo: React.FC = () => {
             fontWeight: 700,
             mb: 2,
             color: colors.deepBlue,
-            fontFamily: '"Open Sauce One", sans-serif',
+            fontFamily: (theme) => theme.fontTokens.heading.bold,
           }}
         >
           Logo Component Demo
@@ -119,7 +135,7 @@ const LogoDemo: React.FC = () => {
           sx={{
             color: isDarkMode ? colors.silver : colors.darkGray,
             mb: 2,
-            fontFamily: '"Open Sauce Sans", sans-serif',
+            fontFamily: (theme) => theme.fontTokens.body.regular,
           }}
         >
           Showcasing theme-aware logo variants
@@ -133,8 +149,9 @@ const LogoDemo: React.FC = () => {
             lineHeight: 1.7,
           }}
         >
-          The Logo component automatically switches between light and dark versions
-          based on the current theme. Current theme: <strong>{isDarkMode ? "Dark" : "Light"}</strong>
+          The Logo component automatically switches between light and dark
+          versions based on the current theme. Current theme:{" "}
+          <strong>{isDarkMode ? "Dark" : "Light"}</strong>
         </Typography>
       </Box>
 
@@ -146,7 +163,7 @@ const LogoDemo: React.FC = () => {
               fontWeight: 600,
               mb: 1,
               color: colors.deepBlue,
-              fontFamily: '"Open Sauce One", sans-serif',
+              fontFamily: (theme) => theme.fontTokens.heading.semiBold,
             }}
           >
             {section.title}
@@ -156,7 +173,7 @@ const LogoDemo: React.FC = () => {
             sx={{
               color: isDarkMode ? colors.silver : colors.darkGray,
               mb: 3,
-              fontFamily: '"Open Sauce Sans", sans-serif',
+              fontFamily: (theme) => theme.fontTokens.body.regular,
             }}
           >
             {section.description}
@@ -198,7 +215,7 @@ const LogoDemo: React.FC = () => {
                     sx={{
                       fontWeight: 600,
                       color: isDarkMode ? "#ffffff" : colors.charcoal,
-                      fontFamily: '"Open Sauce Sans", sans-serif',
+                      fontFamily: (theme) => theme.fontTokens.body.semiBold,
                     }}
                   >
                     {item.label}
@@ -207,7 +224,7 @@ const LogoDemo: React.FC = () => {
                     variant="caption"
                     sx={{
                       color: isDarkMode ? colors.silver : colors.darkGray,
-                      fontFamily: '"Open Sauce Sans", sans-serif',
+                      fontFamily: (theme) => theme.fontTokens.body.regular,
                       display: "block",
                       mt: 1,
                     }}
@@ -222,7 +239,12 @@ const LogoDemo: React.FC = () => {
           </Grid>
 
           {sectionIndex < demoSections.length - 1 && (
-            <Divider sx={{ mt: 4, borderColor: isDarkMode ? colors.graphite : colors.silver }} />
+            <Divider
+              sx={{
+                mt: 4,
+                borderColor: isDarkMode ? colors.graphite : colors.silver,
+              }}
+            />
           )}
         </Box>
       ))}
@@ -242,7 +264,7 @@ const LogoDemo: React.FC = () => {
             fontWeight: 600,
             mb: 2,
             color: colors.deepBlue,
-            fontFamily: '"Open Sauce One", sans-serif',
+            fontFamily: (theme) => theme.fontTokens.heading.semiBold,
           }}
         >
           Usage Guidelines
@@ -256,11 +278,11 @@ const LogoDemo: React.FC = () => {
             mx: "auto",
           }}
         >
-          • Use <strong>header variant</strong> in navigation areas<br />
-          • Use <strong>footer variant</strong> in footer sections<br />
-          • Use <strong>imageOnly</strong> for avatars or tight spaces<br />
-          • Always provide <strong>onClick</strong> for clickable logos<br />
-          • The component automatically adapts to light/dark themes
+          • Use <strong>header variant</strong> in navigation areas
+          <br />• Use <strong>footer variant</strong> in footer sections
+          <br />• Use <strong>imageOnly</strong> for avatars or tight spaces
+          <br />• Always provide <strong>onClick</strong> for clickable logos
+          <br />• The component automatically adapts to light/dark themes
         </Typography>
       </Box>
     </Container>

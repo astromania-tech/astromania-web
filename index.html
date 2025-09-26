@@ -105,13 +105,13 @@
         </script>
 
         <!-- Performance and Security -->
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
 
         <!-- Security Headers -->
         <meta http-equiv="X-Content-Type-Options" content="nosniff" />
         <meta http-equiv="X-Frame-Options" content="DENY" />
         <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+
+        <!-- All fonts loaded locally - no external dependencies -->
 
         <!-- Inline Critical CSS for Performance -->
         <style>
@@ -128,14 +128,7 @@
             }
 
             body {
-                font-family:
-                    "Open Sauce Sans",
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    "Segoe UI",
-                    "Roboto",
-                    "Helvetica Neue",
-                    sans-serif;
+                /* Font family comes from MUI theme - no hardcoding */
                 font-weight: 400;
                 line-height: 1.7;
                 color: #1e293b;

@@ -46,7 +46,7 @@ const Header: React.FC = () => {
   const themedStyles = useThemedStyles();
 
   // Responsive design hook - switches to mobile layout below 768px
-  const isMobile = useMediaQuery("(max-width:768px)");
+  const isMobile = useMediaQuery("(max-width:1080px)");
 
   // State management for mobile drawer visibility
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -156,7 +156,7 @@ const Header: React.FC = () => {
               <ListItemText
                 primary={item.label}
                 primaryTypographyProps={{
-                  fontFamily: '"Open Sauce Sans", sans-serif',
+                  fontFamily: (theme) => theme.fontTokens.body.medium,
                   fontWeight: 500,
                   // Text color based on active state for optimal contrast
                   color: isActivePath(item.path)
@@ -178,35 +178,43 @@ const Header: React.FC = () => {
         position="fixed"
         elevation={0} // Remove default shadow for custom styling
         sx={{
+          display: "flex",
+          mt: 1,
           // Glassmorphism background with transparency and blur
           backgroundColor: isDarkMode
-            ? "transparent" // Dark navy with 95% opacity
-            : "rgba(250, 251, 252, 0.75)", // Light matte white with 95% opacity
-          backdropFilter: "blur(15px) saturate(180%)", // Creates glassmorphism effect
-          borderBottom: `2px solid ${themedStyles.getBorderColor()}`, // Subtle border
-          boxShadow: themedStyles.getShadow("low"), // Minimal shadow for depth
+            ? "unset" // Dark navy with 95% opacity
+            : "unset", // Light matte white with 95% opacity
+          backdropFilter: "blur(0px)", // Creates glassmorphism effect
+          borderBottom: `2px none ${themedStyles.getBorderColor()}`, // Subtle border
+          boxShadow: themedStyles.getShadow("none"), // Minimal shadow for depth
           borderRadius: "0 0 30px 30px", // No border radius for full-width header
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth={isMobile? "md" : "xl"}>
           <Toolbar sx={{ justifyContent: "space-between", py: 1.5 }}>
-            {/* Logo Section - Always visible */}
-            <Logo variant="header" onClick={() => handleNavigation("/")} />
-
             {/* Desktop Navigation - Hidden on mobile */}
             {!isMobile && (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
-                {/* Pill Navigation Container - Modern design pattern */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100vw",
+                }}
+              >
+                {/* Left Pill: Logo + Navigation Container - Okta-inspired */}
                 <Box
                   sx={{
+                    // mt: 1.5,
                     display: "flex",
                     alignItems: "center",
                     // Glassmorphism container background
                     backgroundColor: isDarkMode
                       ? "rgba(51, 65, 85, 0.6)" // Dark slate with transparency
                       : "rgba(248, 250, 252, 0.8)", // Light background with transparency
-                    borderRadius: "32px", // Full pill shape
-                    padding: "8px 12px",
+                    borderRadius: "64px", // Full pill shape
+                    padding: "15px 32px",
+                    boxShadow: themedStyles.getShadow("medium"), // Medium shadow for depth
                     // Subtle borders for definition
                     border: `1px solid ${
                       isDarkMode
@@ -214,9 +222,30 @@ const Header: React.FC = () => {
                         : "rgba(226, 232, 240, 0.5)" // Light border
                     }`,
                     backdropFilter: "blur(12px)", // Additional blur for depth
-                    gap: 1, // Space between navigation buttons
+                    gap: 1, // Space between logo and navigation buttons
                   }}
                 >
+                  {/* Logo inside navigation pill */}
+                  <Box sx={{ mr: 1 }}>
+                    <Logo
+                      variant="header"
+                      size="large"
+                      onClick={() => handleNavigation("/")}
+                    />
+                  </Box>
+
+                  {/* Subtle divider between logo and nav */}
+                  <Box
+                    sx={{
+                      width: "1px",
+                      height: "24px",
+                      backgroundColor: isDarkMode
+                        ? "rgba(71, 85, 105, 0.4)"
+                        : "rgba(226, 232, 240, 0.6)",
+                      mx: 1,
+                    }}
+                  />
+
                   {/* Navigation Buttons inside Pill Container */}
                   {navigationItems.map((item) => (
                     <Button
@@ -239,9 +268,9 @@ const Header: React.FC = () => {
                         fontSize: "0.875rem",
                         // Dynamic font weight for active emphasis
                         fontWeight: isActivePath(item.path) ? 600 : 500,
-                        fontFamily: '"Open Sauce Sans", sans-serif',
-                        px: 2.5,
-                        py: 1,
+                        fontFamily: (theme) => theme.fontTokens.body.medium,
+                        px: 2,
+                        py: 0.5,
                         borderRadius: "24px", // Rounded button shape
                         minWidth: "auto",
                         transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)", // Smooth animations
@@ -269,130 +298,215 @@ const Header: React.FC = () => {
                   ))}
                 </Box>
 
-                {/* Theme Toggle Button - Glassmorphism style */}
-                <IconButton
-                  onClick={toggleDarkMode}
+                {/* Right Pill: CTA Buttons + Theme Toggle - Okta-inspired */}
+                <Box
                   sx={{
-                    color: themedStyles.getTextColor("secondary"),
-                    // Consistent glassmorphism styling with navigation
+                    // mt: 1.5,
+                    display: "flex",
+                    alignItems: "center",
+                    // Glassmorphism container background matching left pill
                     backgroundColor: isDarkMode
                       ? "rgba(51, 65, 85, 0.6)"
                       : "rgba(248, 250, 252, 0.8)",
+                    borderRadius: "30px", // Full pill shape
+                    padding: "10px 15px",
+                    // Subtle borders for definition
                     border: `1px solid ${
                       isDarkMode
                         ? "rgba(71, 85, 105, 0.3)"
                         : "rgba(226, 232, 240, 0.5)"
                     }`,
-                    borderRadius: "12px",
-                    backdropFilter: "blur(12px)",
-                    "&:hover": {
-                      // Enhanced background on hover
-                      backgroundColor: isDarkMode
-                        ? "rgba(71, 85, 105, 0.8)"
-                        : "rgba(241, 245, 249, 0.9)",
-                      borderColor: themedStyles.getBorderColor("hover"),
-                      transform: "scale(1.05)", // Slight scale effect
-                    },
+                    backdropFilter: "blur(12px)", // Additional blur for depth
+                    boxShadow: themedStyles.getShadow("medium"), // Minimal shadow for depth
+                    gap: 1.5, // Space between buttons
                   }}
                 >
-                  {/* Dynamic icon based on current theme */}
-                  {isDarkMode ? <Brightness7 /> : <Brightness4 />}
-                </IconButton>
+                  {/* Theme Toggle Button */}
+                  <IconButton
+                    onClick={toggleDarkMode}
+                    sx={{
+                      color: themedStyles.getTextColor("secondary"),
+                      backgroundColor: "transparent",
+                      borderRadius: "30px",
+                      padding: "5px",
+                      "&:hover": {
+                        backgroundColor: isDarkMode
+                          ? "rgba(71, 85, 105, 0.4)"
+                          : "rgba(241, 245, 249, 0.6)",
+                        transform: "scale(1.05)", // Slight scale effect
+                      },
+                    }}
+                  >
+                    {/* Dynamic icon based on current theme */}
+                    {isDarkMode ? <Brightness7 /> : <Brightness4 />}
+                  </IconButton>
 
-                {/* Call-to-Action Button - Primary action */}
-                <Button
-                  variant="contained"
-                  onClick={() => handleNavigation("/contact")}
-                  sx={{
-                    // Theme-aware primary colors
-                    backgroundColor: isDarkMode
-                      ? colors.accentBlue
-                      : colors.deepBlue,
-                    color: colors.pureWhite,
-                    fontFamily: '"Open Sauce Sans", sans-serif',
-                    fontWeight: 600,
-                    fontSize: "0.875rem",
-                    textTransform: "none",
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: "12px",
-                    boxShadow: "none", // Remove default Material-UI shadow
-                    border: "none",
-                    transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
-                    "&:hover": {
-                      // Darker shade on hover
+                  {/* Secondary CTA Button */}
+                  <Button
+                    variant="outlined"
+                    onClick={() => handleNavigation("/about")}
+                    sx={{
+                      color: isDarkMode ? colors.silver : colors.slate,
+                      borderColor: isDarkMode
+                        ? "rgba(71, 85, 105, 0.4)"
+                        : "rgba(226, 232, 240, 0.6)",
+                      backgroundColor: "transparent",
+                      fontFamily: (theme) => theme.fontTokens.body.medium,
+                      fontWeight: 500,
+                      fontSize: "0.875rem",
+                      textTransform: "none",
+                      px: 2.5,
+                      py: 1,
+                      borderWidth: "1px",
+                      borderRadius: "30px",
+                      padding: "5px 15px",
+                      "&:hover": {
+                        backgroundColor: isDarkMode
+                          ? "rgba(71, 85, 105, 0.3)"
+                          : "rgba(241, 245, 249, 0.8)",
+                        borderColor: isDarkMode
+                          ? colors.accentBlue
+                          : colors.deepBlue,
+                        color: isDarkMode ? colors.pureWhite : colors.charcoal,
+                        transform: "translateY(-1px)",
+                      },
+                    }}
+                  >
+                    Learn More
+                  </Button>
+
+                  {/* Primary Call-to-Action Button */}
+                  <Button
+                    variant="contained"
+                    onClick={() => handleNavigation("/contact")}
+                    sx={{
+                      // Theme-aware primary colors
                       backgroundColor: isDarkMode
-                        ? colors.brightBlue
-                        : colors.navyBlue,
-                      transform: "translateY(-1px)", // Lift effect
-                      // Custom shadow for depth
-                      boxShadow: isDarkMode
-                        ? "0 12px 24px rgba(59, 130, 246, 0.15)" // Blue shadow for dark mode
-                        : "0 12px 24px rgba(26, 35, 126, 0.15)", // Navy shadow for light mode
-                    },
-                  }}
-                >
-                  Get Started
-                </Button>
+                        ? colors.accentBlue
+                        : colors.deepBlue,
+                      color: colors.pureWhite,
+                      fontFamily: (theme) => theme.fontTokens.body.semiBold,
+                      fontWeight: 600,
+                      fontSize: "0.875rem",
+                      textTransform: "none",
+                      px: 3,
+                      py: 1,
+                      borderRadius: "30px",
+                      padding: "5px 15px",
+                      boxShadow: "none", // Remove default Material-UI shadow
+                      border: "none",
+                      transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+                      "&:hover": {
+                        // Darker shade on hover
+                        backgroundColor: isDarkMode
+                          ? colors.brightBlue
+                          : colors.navyBlue,
+                        transform: "translateY(-1px)", // Lift effect
+                        // Custom shadow for depth
+                        boxShadow: isDarkMode
+                          ? "0 8px 16px rgba(59, 130, 246, 0.15)" // Blue shadow for dark mode
+                          : "0 8px 16px rgba(26, 35, 126, 0.15)", // Navy shadow for light mode
+                      },
+                    }}
+                  >
+                    Get Started
+                  </Button>
+                </Box>
               </Box>
             )}
 
             {/* Mobile Navigation - Visible only on mobile */}
             {isMobile && (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                {/* Mobile Theme Toggle */}
-                <IconButton
-                  onClick={toggleDarkMode}
+              <Box
+                sx={{
+                  mt: 0.25,
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <Box
                   sx={{
-                    color: themedStyles.getTextColor("secondary"),
-                    // Consistent glassmorphism styling
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    // Glassmorphism container background
                     backgroundColor: isDarkMode
-                      ? "rgba(51, 65, 85, 0.6)"
-                      : "rgba(248, 250, 252, 0.8)",
+                      ? "rgba(51, 65, 85, 0.6)" // Dark slate with transparency
+                      : "rgba(248, 250, 252, 0.8)", // Light background with transparency
+                    borderRadius: "35px", // Full pill shape
+                    padding: "5px 15px",
+                    boxShadow: themedStyles.getShadow("medium"), // Medium shadow for depth
+                    // Subtle borders for definition
                     border: `1px solid ${
                       isDarkMode
-                        ? "rgba(71, 85, 105, 0.3)"
-                        : "rgba(226, 232, 240, 0.5)"
+                        ? "rgba(71, 85, 105, 0.3)" // Dark border
+                        : "rgba(226, 232, 240, 0.5)" // Light border
                     }`,
-                    borderRadius: "12px",
-                    backdropFilter: "blur(12px)",
-                    "&:hover": {
-                      backgroundColor: isDarkMode
-                        ? "rgba(71, 85, 105, 0.8)"
-                        : "rgba(241, 245, 249, 0.9)",
-                      borderColor: themedStyles.getBorderColor("hover"),
-                    },
+                    backdropFilter: "blur(12px)", // Additional blur for depth
+                    gap: 1, // Space between logo and navigation buttons
                   }}
                 >
-                  {isDarkMode ? <Brightness7 /> : <Brightness4 />}
-                </IconButton>
+                  <Logo
+                    variant="header"
+                    onClick={() => handleNavigation("/")}
+                  />
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    {/* Mobile Theme Toggle */}
+                    <IconButton
+                      onClick={toggleDarkMode}
+                      sx={{
+                        color: themedStyles.getTextColor("secondary"),
+                        // Consistent glassmorphism styling
+                        backgroundColor: isDarkMode
+                          ? "rgba(51, 65, 85, 0.6)"
+                          : "rgba(248, 250, 252, 0.8)",
+                        border: `1px solid ${
+                          isDarkMode
+                            ? "rgba(71, 85, 105, 0.3)"
+                            : "rgba(226, 232, 240, 0.5)"
+                        }`,
+                        borderRadius: "30px",
+                        backdropFilter: "blur(12px)",
+                        "&:hover": {
+                          backgroundColor: isDarkMode
+                            ? "rgba(71, 85, 105, 0.8)"
+                            : "rgba(241, 245, 249, 0.9)",
+                          borderColor: themedStyles.getBorderColor("hover"),
+                        },
+                      }}
+                    >
+                      {isDarkMode ? <Brightness7 /> : <Brightness4 />}
+                    </IconButton>
 
-                {/* Mobile Menu Button - Hamburger menu trigger */}
-                <IconButton
-                  onClick={handleDrawerToggle}
-                  sx={{
-                    color: themedStyles.getTextColor("secondary"),
-                    // Matching glassmorphism styling
-                    backgroundColor: isDarkMode
-                      ? "rgba(51, 65, 85, 0.6)"
-                      : "rgba(248, 250, 252, 0.8)",
-                    border: `1px solid ${
-                      isDarkMode
-                        ? "rgba(71, 85, 105, 0.3)"
-                        : "rgba(226, 232, 240, 0.5)"
-                    }`,
-                    borderRadius: "12px",
-                    backdropFilter: "blur(12px)",
-                    "&:hover": {
-                      backgroundColor: isDarkMode
-                        ? "rgba(71, 85, 105, 0.8)"
-                        : "rgba(241, 245, 249, 0.9)",
-                      borderColor: themedStyles.getBorderColor("hover"),
-                    },
-                  }}
-                >
-                  <MenuIcon />
-                </IconButton>
+                    {/* Mobile Menu Button - Hamburger menu trigger */}
+                    <IconButton
+                      onClick={handleDrawerToggle}
+                      sx={{
+                        color: themedStyles.getTextColor("secondary"),
+                        // Matching glassmorphism styling
+                        backgroundColor: isDarkMode
+                          ? "rgba(51, 65, 85, 0.6)"
+                          : "rgba(248, 250, 252, 0.8)",
+                        border: `1px solid ${
+                          isDarkMode
+                            ? "rgba(71, 85, 105, 0.3)"
+                            : "rgba(226, 232, 240, 0.5)"
+                        }`,
+                        borderRadius: "30px",
+                        backdropFilter: "blur(12px)",
+                        "&:hover": {
+                          backgroundColor: isDarkMode
+                            ? "rgba(71, 85, 105, 0.8)"
+                            : "rgba(241, 245, 249, 0.9)",
+                          borderColor: themedStyles.getBorderColor("hover"),
+                        },
+                      }}
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                  </Box>
+                </Box>
               </Box>
             )}
           </Toolbar>

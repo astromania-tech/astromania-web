@@ -72,7 +72,6 @@ export default defineConfig({
           motion: ["framer-motion"],
 
           // Fonts
-          fonts: ["@fontsource/open-sauce-one", "@fontsource/open-sauce-sans"],
         },
 
         // Asset naming

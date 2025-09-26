@@ -133,7 +133,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           backgroundSize: "cover",
           backgroundPosition: "center 30%",
           backgroundRepeat: "no-repeat",
-          filter: `brightness(${isDarkMode ? 0.80 : 0.90}) contrast(1.25)`,
+          filter: `brightness(${isDarkMode ? 0.8 : 0.9}) contrast(1.25)`,
           transition: "filter 0.4s ease-in-out",
         }}
       />
@@ -191,7 +191,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                     fontSize: { xs: "0.875rem", md: "0.9rem" },
                     border: `1px solid ${themedStyles.getBorderColor()}`,
                     borderRadius: "32px",
-                    fontFamily: '"Open Sauce Sans", sans-serif',
+                    fontFamily: (theme) => theme.fontTokens.body.medium,
                     boxShadow: themedStyles.getShadow("low"),
                     transition: "all 0.3s ease",
                     "&:hover": {
@@ -220,7 +220,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                       xl: "4rem",
                     },
                     lineHeight: { xs: 1.2, md: 1.1 },
-                    fontFamily: '"Open Sauce One", sans-serif',
+                    fontFamily: (theme) => theme.fontTokens.display.black,
                     letterSpacing: "-0.025em",
                     maxWidth: { lg: "90%" },
                   }}
@@ -256,7 +256,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                       md: "1.2rem",
                       lg: "1.3rem",
                     },
-                    fontFamily: '"Open Sauce Sans", sans-serif',
+                    fontFamily: (theme) => theme.typography.fontFamily,
                     maxWidth: { lg: "85%" },
                     opacity: 0.95,
                   }}
@@ -360,8 +360,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                     >
                       <Box
                         sx={{
-                          width: { xs: 36, md: 44 },
-                          height: { xs: 36, md: 44 },
+                          width: { xs: 40, md: 65 },
+                          height: { xs: 40, md: 65 },
                           borderRadius: "12px",
                           background: `linear-gradient(135deg, ${colors.accentBlue}20, ${colors.deepBlue}20)`,
                           display: "flex",
@@ -373,7 +373,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                       >
                         {React.cloneElement(achievement.icon, {
                           sx: {
-                            fontSize: { xs: 18, md: 22 },
+                            fontSize: { xs: 20, md: 25 },
                             color: colors.accentBlue,
                           },
                         })}
@@ -385,13 +385,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                           sx={{
                             fontWeight: 700,
                             color: themedStyles.getTextColor("primary"),
-                            fontFamily: '"Open Sauce One", sans-serif',
+                            fontFamily: (theme) =>
+                              theme.fontTokens.heading.bold,
                             fontSize: {
-                              xs: "1.2rem",
+                              xs: "1.5rem",
                               sm: "1.4rem",
-                              md: "1.6rem",
+                              md: "1.9rem",
                             },
-                            lineHeight: 1.2,
+                            lineHeight: 0.8,
                             mb: 0.5,
                           }}
                         >
@@ -401,8 +402,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                           variant="body2"
                           sx={{
                             color: themedStyles.getTextColor("secondary"),
-                            fontFamily: '"Open Sauce Sans", sans-serif',
-                            fontSize: { xs: "0.75rem", md: "0.8rem" },
+                            fontFamily: (theme) => theme.fontTokens.body.medium,
+                            fontSize: { xs: "0.85rem", md: "0.9rem" },
                             fontWeight: 500,
                             opacity: 0.9,
                           }}
